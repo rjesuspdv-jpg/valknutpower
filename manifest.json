@@ -1,0 +1,17 @@
+{
+    "name": "VALKNUTPOWER Elite Training",
+    "short_name": "VALKNUT",
+    "description": "Sistema de entrenamiento de élite - VALKNUTPOWER",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#0a0a0c",
+    "theme_color": "#D94343",
+    "icons": [
+        {
+            "src": "https://cdn-icons-png.flaticon.com/512/2936/2936886.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
