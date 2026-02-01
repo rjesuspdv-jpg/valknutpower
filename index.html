@@ -183,14 +183,24 @@
                     <div id="diet-info" class="space-y-6"></div>
 
                     <div class="mt-8 p-4 bg-white/5 rounded-2xl border border-white/10">
-                        <h4 class="text-[10px] font-black text-gray-400 uppercase mb-3 text-center">Calculadora Valknut
-                        </h4>
+                        <h4 class="text-[12px] font-black text-gold-500 uppercase mb-3 text-center tracking-widest">
+                            PROTOCOLO NUTRICIÓN JESUS</h4>
                         <div class="flex items-end justify-center gap-2 mb-2">
-                            <span id="cal-count" class="text-4xl font-black text-white">---</span>
-                            <span class="text-xs font-bold text-gray-500 mb-2">kcal</span>
+                            <span id="cal-count" class="text-5xl font-black text-white">2350</span>
+                            <span class="text-sm font-bold text-gray-400 mb-2">kcal</span>
                         </div>
-                        <input type="number" id="user-weight" placeholder="Peso (kg)" oninput="updateCals()"
-                            class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm outline-none focus:border-red-500 transition text-center">
+                        <p class="text-[10px] text-center text-gray-500 mb-4 uppercase font-bold tracking-tighter">
+                            Objetivo: Bajar Grasa Visceral (Meta: < 13)</p>
+
+                                <div class="space-y-3">
+                                    <div class="bg-white/5 p-3 rounded-xl border-l-4 border-yellow-500">
+                                        <span class="text-[10px] font-black block text-yellow-500">SUPLEMENTOS
+                                            DIARIOS</span>
+                                        <p class="text-[11px] text-white">● <b>ISO100:</b> 1 scoop con agua/leche (+
+                                            fruta opcional)<br>● <b>Creatina:</b> 5g (1 scoop) diario<br>● <b>Amino
+                                                Energy + Tea:</b> Para hidratar</p>
+                                    </div>
+                                </div>
                     </div>
                 </div>
 
@@ -248,7 +258,7 @@
                         { name: "Press Militar Barra", reps: "3x8-10", tech: "RIR 2", notes: "Core ultra estable." },
                         { name: "Elevaciones Laterales", reps: "4x15-20", tech: "Drop Set Final", notes: "Hombros hacia atrás." },
                         { name: "Curl Bíceps Barra Z", reps: "3x12", tech: "Sin Inercia", notes: "Codos bloqueados al torso." }
-                    ], diet: { title: "Día de Carga (HI)", desc: "2.5g Carbos x kg. Prioriza hidratos antes de entrenar.", menu: "Pasta Boloñesa (Carne magra), Avena con Proteína." }
+                    ], diet: { title: "Día de Carga Jesus", desc: "Pan integral y tostadas. Proteína alta para proteger músculo.", menu: "Revuelto 4 huevos, Pan integral, Pollo con Arroz." }
                 },
                 {
                     focus: "TREN INFERIOR (POTENCIA)", exercises: [
@@ -309,7 +319,7 @@
                         { name: "Peso Muerto Rumano", reps: "3x12", tech: "Stretch Focus", notes: "Baja la barra pegada a tus piernas." },
                         { name: "Curl Femoral Tumbado", reps: "3x12", tech: "Control Excétrico", notes: "Baja muy lento las piernas." },
                         { name: "Pantorrilla en Máquina", reps: "3x12", tech: "Rango Máximo", notes: "Baja bien los talones." }
-                    ], diet: { title: "Día de Fuerza", desc: "Prioriza hidratos complejos post-gym.", menu: "Bowl de Avena, Salmón con Quinoa." }
+                    ], diet: { title: "Día de Fuerza", desc: "Prioriza hidratos complejos post-gym.", menu: "Huevos revueltos, Salmón con Quinoa." }
                 },
                 {
                     focus: "JALÓN / UPPER (ALTERNO)", exercises: [
@@ -349,7 +359,7 @@
                         { name: "Press Militar", reps: "3x8-12", tech: "Rango Completo", notes: "Hombros potentes de pie o sentado." },
                         { name: "Dominadas (Pull-ups)", reps: "3 al Fallo", tech: "Rey Dorsales", notes: "Usa banda si es necesario. Controla el descenso." },
                         { name: "Elevaciones Laterales", reps: "3x12-15", tech: "Ancho Hombros", notes: "Inclínate levemente al lado trabajado." }
-                    ], diet: { title: "Fuerza Jeremy", desc: "Superávit ligero. Proteína 2.2g/kg.", menu: "Avena con fruta, Carne roja y Arroz." }
+                    ], diet: { title: "Fuerza Jeremy", desc: "Superávit ligero. Proteína 2.2g/kg.", menu: "Pan integral con fruta, Carne roja y Arroz." }
                 },
                 {
                     focus: "INFERIOR (CUÁDRICEPS)", exercises: [
@@ -399,11 +409,9 @@
         const dayNames = ["LUNES", "MARTES", "MIÉRCOLES", "JUEVES", "VIERNES", "SÁBADO"];
 
         function updateCals() {
-            const w = document.getElementById('user-weight').value;
-            if (!w) return;
-            const factor = state.mode === 'valknut' ? 16 : (state.day % 2 === 0 ? 15.5 : 14);
-            const res = w * 2.2 * factor;
-            document.getElementById('cal-count').innerText = Math.round(res);
+            // Plan personalizado para Jesus (291lb, BMR 1982)
+            // Target: 2350 kcal para recomposición y pérdida visceral
+            document.getElementById('cal-count').innerText = "2350";
         }
 
         function setGender(g) {
