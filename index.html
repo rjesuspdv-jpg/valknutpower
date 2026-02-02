@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>VALKNUTPOWER - Personal Multi-Profile App</title>
+
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-black: #0a0a0c;
+            --card-gray: #141417;
+            --brand-red: #D94343;
+            --brand-red-glow: rgba(217, 67, 67, 0.4);
+            --brand-gold: #D4AF37;
+            --brand-gold-glow: rgba(212, 175, 55, 0.4);
+            --brand-cyan: #00f2ff;
+            --text-main: #ffffff;
+            --text-muted: #88888b;
+            --safe-green: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.5;
+            padding-bottom: 40px;
+        }
+
+        /* --- UI Components --- */
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 20px;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--brand-red);
+        }
+
+        /* Profile Selector Overlay */
+        .profile-selector-wrap {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        select {
+            width: 100%;
+            background: var(--card-gray);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 15px;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            appearance: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--brand-red);
+            box-shadow: 0 0 15px var(--brand-red-glow);
+        }
+
+        /* Toggle Switch */
+        .status-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--card-gray);
+            padding: 15px 20px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .toggle-label {
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #333;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--safe-green);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(30px);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-gray);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .card-header i {
+            color: var(--brand-red);
+            font-size: 1.2rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Macro Pills */
+        .macro-grid {
+            display: grid;
+            grid-cols: 3;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .macro-pill {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px 5px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .macro-val {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 900;
+        }
+
+        .macro-tag {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        /* Training List */
+        .exercise-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--brand-red);
+        }
+
+        .ex-info h4 {
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .ex-info span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Alerts & Warnings */
+        .alert-box {
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .alert-rest {
+            background: rgba(217, 67, 67, 0.1);
+            border: 1px solid var(--brand-red);
+            color: var(--brand-red);
+        }
+
+        .alert-train {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--safe-green);
+            color: var(--safe-green);
+        }
+
+        /* Anchor Rule Section */
+        .anchor-card {
+            background: linear-gradient(135deg, #1e1e22 0%, #0a0a0c 100%);
+            border: 1px solid var(--brand-gold);
+        }
+
+        .anchor-card b {
+            color: var(--brand-gold);
+        }
+
+        /* Score Tracker */
+        .score-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 8px 0;
+            cursor: pointer;
+        }
+
+        .score-check {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .score-check.checked {
+            background: var(--safe-green);
+            border-color: var(--safe-green);
+        }
+
+        .score-check i {
+            display: none;
+            font-size: 0.8rem;
+        }
+
+        .score-check.checked i {
+            display: block;
+        }
+
+        .score-label {
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        .score-display {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .score-num {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--brand-cyan);
+            display: block;
+            line-height: 1;
+        }
+
+        .score-msg {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 900;
+            margin-top: 5px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">VALKNUT<span>POWER</span></div>
+            <p
+                style="font-size: 0.7rem; text-transform: uppercase; tracking: 3px; color: var(--text-muted); font-weight: 700;">
+                Performance & Longevity</p>
+        </header>
+
+        <!-- Selector de Perfil -->
+        <div class="profile-selector-wrap">
+            <label
+                style="position: absolute; top: -10px; left: 15px; background: var(--bg-black); padding: 0 8px; font-size: 0.6rem; font-weight: 900; color: var(--brand-red); z-index: 2;">WHO
+                ARE YOU TODAY?</label>
+            <select id="user-select" onchange="updateUI()">
+                <option value="beast">BEAST MODE (Jesus & Amigo)</option>
+                <option value="fitness">FITNESS (Esposa)</option>
+                <option value="senior">SENIOR ELITE (Suegros)</option>
+            </select>
+        </div>
+
+        <!-- Training Switch -->
+        <div class="status-toggle">
+            <span class="toggle-label" id="status-text">MODO DESCANSO</span>
+            <label class="switch">
+                <input type="checkbox" id="training-toggle" onchange="updateUI()">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <!-- Dashboard Dynamico -->
+        <div id="dynamic-content">
+
+            <!-- Card 1: Macros o Info Base -->
+            <div class="card" id="macros-card">
+                <div class="card-header">
+                    <i class="fas fa-fire"></i>
+                    <span class="card-title">Protocolo Nutricional</span>
+                </div>
+                <div id="macros-ui">
+                    <div class="macro-grid">
+                        <div class="macro-pill"><span class="macro-val" id="kcal">---</span><span
+                                class="macro-tag">Kcal</span></div>
+                        <div class="macro-pill"><span class="macro-val" id="prot">---</span><span
+                                class="macro-tag">Proteína</span></div>
+                        <div class="macro-pill"><span class="macro-val" id="fat">---</span><span
+                                class="macro-tag">Grasas</span></div>
+                    </div>
+                </div>
+                <!-- Alerta Nutricional Dinamica -->
+                <div id="nutrition-alert" class="alert-box"></div>
+            </div>
+
+            <!-- Card 2: Reglas Especiales / La Regla del Ancla -->
+            <div class="card anchor-card">
+                <div class="card-header">
+                    <i class="fas fa-anchor" style="color: var(--brand-gold);"></i>
+                    <span class="card-title" style="color: var(--brand-gold);">La Regla del Ancla</span>
+                </div>
+                <p style="font-size: 0.85rem; font-style: italic;">"Si no ves una fuente de <b>Proteína</b> clara en tu
+                    plato, esa comida no cuenta. Ancla tu nutrición a la proteína primero."</p>
+            </div>
+
+            <!-- Card 3: Rutina de Entrenamiento -->
+            <div class="card" id="training-card">
+                <div class="card-header">
+                    <i class="fas fa-dumbbell"></i>
+                    <span class="card-title">Rutina del Día</span>
+                </div>
+                <div id="routine-list">
+                    <!-- Ejercicios aqui -->
+                </div>
+                <div id="beast-rules" class="hidden"
+                    style="margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05);">
+                    <h5 style="color: var(--brand-cyan); font-weight: 900; font-size: 0.7rem; text-transform: uppercase;"
+                        class="mb-2">Control de Cortisol</h5>
+                    <ul style="font-size: 0.75rem; color: var(--text-muted); list-style: none;">
+                        <li>● No cafeína después de las 4:00 PM</li>
+                        <li>● En cama a las 10:30 PM (No excepciones)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Card 4: Daily Score -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-trophy"></i>
+                    <span class="card-title">VALKNUT DAILY SCORE</span>
+                </div>
+                <div class="score-items">
+                    <div class="score-item" onclick="toggleScoreCheck(this, 20)">
+                        <div class="score-check"><i class="fas fa-check"></i></div>
+                        <span class="score-label">Dormí antes de las 10:30 PM</span>
+                    </div>
+                    <div class="score-item" onclick="toggleScoreCheck(this, 20)">
+                        <div class="score-check"><i class="fas fa-check"></i></div>
+                        <span class="score-label">Completé mis 6 botellas de agua</span>
+                    </div>
+                    <div class="score-item" onclick="toggleScoreCheck(this, 20)">
+                        <div class="score-check"><i class="fas fa-check"></i></div>
+                        <span class="score-label">Cero azúcar / alcohol</span>
+                    </div>
+                    <div class="score-item" onclick="toggleScoreCheck(this, 20)">
+                        <div class="score-check"><i class="fas fa-check"></i></div>
+                        <span class="score-label">Entrenamiento completado</span>
+                    </div>
+                    <div class="score-item" onclick="toggleScoreCheck(this, 20)">
+                        <div class="score-check"><i class="fas fa-check"></i></div>
+                        <span class="score-label">Proteína en cada comida</span>
+                    </div>
+                </div>
+                <div class="score-display">
+                    <span class="score-num" id="total-score">0%</span>
+                    <span class="score-msg" id="score-feedback">Disciplina es Libertad</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- Data Layer ---
+        const USER_DATA = {
+            beast: {
+                name: "BEAST MODE",
+                macros: { training: { kcal: 2600, prot: "220g", fat: "70g" }, rest: { kcal: 2100, prot: "240g", fat: "80g" } },
+                routine: [
+                    { name: "Press Inclinado Smith", sets: "4x8 (RIR 1)" },
+                    { name: "Remo Heavy Hammer", sets: "4x10 (RIR 1)" },
+                    { name: "Prensa Vertical", sets: "3x12 (Fallo)" }
+                ],
+                showBeastRules: true
+            },
+            fitness: {
+                name: "FITNESS",
+                macros: { training: { kcal: 1800, prot: "140g", fat: "55g" }, rest: { kcal: 1500, prot: "150g", fat: "60g" } },
+                routine: [
+                    { name: "Hip Thrust", sets: "3x12" },
+                    { name: "Sentadilla Goblet", sets: "3x15" },
+                    { name: "Jalón al pecho", sets: "3x12" }
+                ],
+                showBeastRules: false
+            },
+            senior: {
+                name: "SENIOR ELITE",
+                macros: null, // Sin macros estrictos
+                routine: [
+                    { name: "Prensa Horizontal", sets: "2x12" },
+                    { name: "Chest Press Máquina", sets: "2x12" },
+                    { name: "Remo Sentado", sets: "2x12" },
+                    { name: "Caminata Banda", sets: "10 min" }
+                ],
+                showBeastRules: false
+            }
+        };
+
+        let currentPoints = 0;
+
+        // --- Core Logic ---
+        function updateUI() {
+            const userKey = document.getElementById('user-select').value;
+            const isTraining = document.getElementById('training-toggle').checked;
+            const user = USER_DATA[userKey];
+
+            // 1. Update Header Status
+            const statusText = document.getElementById('status-text');
+            statusText.innerText = isTraining ? "MODO TRAINING + CARBS" : "MODO DESCANSO / RECOVERY";
+            statusText.style.color = isTraining ? "var(--safe-green)" : "var(--text-muted)";
+
+            // 2. Update Macros
+            const macrosUI = document.getElementById('macros-ui');
+            const nutAlert = document.getElementById('nutrition-alert');
+
+            if (user.macros) {
+                macrosUI.classList.remove('hidden');
+                const m = isTraining ? user.macros.training : user.macros.rest;
+                document.getElementById('kcal').innerText = m.kcal;
+                document.getElementById('prot').innerText = m.prot;
+                document.getElementById('fat').innerText = m.fat;
+
+                // Nut Alerte Logic
+                if (isTraining) {
+                    nutAlert.className = "alert-box alert-train";
+                    nutAlert.innerHTML = `<i class="fas fa-check-circle"></i> PERMITIDO: Té Lipton, Plátano Post-Entreno y Carbohidrato denso.`;
+                } else {
+                    nutAlert.className = "alert-box alert-rest";
+                    nutAlert.innerHTML = `<i class="fas fa-exclamation-triangle"></i> PROHIBIDO: Té Lipton azucarado. Solo Agua/Amino. Cero carbs densos.`;
+                }
+            } else {
+                macrosUI.classList.add('hidden');
+                nutAlert.className = "alert-box alert-train";
+                nutAlert.style.borderColor = "var(--brand-gold)";
+                nutAlert.style.color = "var(--brand-gold)";
+                nutAlert.innerHTML = `<i class="fas fa-user-shield"></i> ENFOQUE: Proteína Alta (Huevo/Pollo) + Hidratación constante vs Sarcopenia.`;
+            }
+
+            // 3. Update Routine
+            const routineList = document.getElementById('routine-list');
+            routineList.innerHTML = '';
+
+            if (isTraining) {
+                document.getElementById('training-card').classList.remove('hidden');
+                user.routine.forEach(ex => {
+                    const div = document.createElement('div');
+                    div.className = 'exercise-item';
+                    div.innerHTML = `
+                        <div class="ex-info">
+                            <h4>${ex.name}</h4>
+                            <span>${ex.sets}</span>
+                        </div>
+                        <i class="fas fa-check-circle" style="color: #333;"></i>
+                    `;
+                    routineList.appendChild(div);
+                });
+            } else {
+                document.getElementById('training-card').classList.add('hidden');
+            }
+
+            // 4. Beast Rules
+            const beastRules = document.getElementById('beast-rules');
+            if (user.showBeastRules) {
+                beastRules.classList.remove('hidden');
+            } else {
+                beastRules.classList.add('hidden');
+            }
+        }
+
+        // --- Interaction Logic ---
+        function toggleScoreCheck(el, pts) {
+            const check = el.querySelector('.score-check');
+            if (check.classList.contains('checked')) {
+                check.classList.remove('checked');
+                currentPoints -= pts;
+            } else {
+                check.classList.add('checked');
+                currentPoints += pts;
+            }
+            updateScoreDisplay();
+        }
+
+        function updateScoreDisplay() {
+            const display = document.getElementById('total-score');
+            const feedback = document.getElementById('score-feedback');
+            display.innerText = `${currentPoints}%`;
+
+            if (currentPoints === 100) {
+                feedback.innerText = "¡Nivel Dios Seleccionado!";
+                feedback.style.color = "var(--brand-cyan)";
+            } else if (currentPoints >= 60) {
+                feedback.innerText = "Buen camino, no aflojes.";
+                feedback.style.color = "var(--brand-gold)";
+            } else {
+                feedback.innerText = "Disciplina es Libertad";
+                feedback.style.color = "var(--text-muted)";
+            }
+        }
+
+        // Initialize
+        window.onload = updateUI;
+
+    </script>
+</body>
+
+</html>
