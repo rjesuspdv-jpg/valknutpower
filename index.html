@@ -171,15 +171,15 @@
                 <!-- Macros Display -->
                 <div class="grid grid-cols-3 gap-3 mb-6">
                     <div class="bg-white/5 p-3 rounded-2xl border border-white/10 text-center">
-                        <span class="block text-2xl font-black text-red-500">250g</span>
+                        <span id="protein-display" class="block text-2xl font-black text-red-500">250g</span>
                         <span class="text-[9px] font-black text-gray-500 uppercase">Proteína</span>
                     </div>
                     <div class="bg-white/5 p-3 rounded-2xl border border-white/10 text-center">
-                        <span class="block text-2xl font-black text-cyan-500">180g</span>
+                        <span id="carbs-display" class="block text-2xl font-black text-cyan-500">180g</span>
                         <span class="text-[9px] font-black text-gray-500 uppercase">Carbohidratos</span>
                     </div>
                     <div class="bg-white/5 p-3 rounded-2xl border border-white/10 text-center">
-                        <span class="block text-2xl font-black text-gold-500">70g</span>
+                        <span id="fat-display" class="block text-2xl font-black text-gold-500">70g</span>
                         <span class="text-[9px] font-black text-gray-500 uppercase">Grasas</span>
                     </div>
                 </div>
@@ -465,8 +465,19 @@
         function calculateCals() {
             const weight = document.getElementById('weight-input').value;
             if (!weight) return;
+
+            // Formula Jeremy Ethier: BW(lb) * 8.075 for specific Jesus base
             const cals = Math.round(weight * 8.075);
+
+            // Macros dinamicos
+            const protein = Math.round(weight * 0.86); // ~250g para 291lb
+            const fat = Math.round(weight * 0.24);      // ~70g para 291lb
+            const carbs = Math.round((cals - (protein * 4) - (fat * 9)) / 4);
+
             document.getElementById('cal-display').innerText = cals;
+            document.getElementById('protein-display').innerText = protein + 'g';
+            document.getElementById('carbs-display').innerText = carbs + 'g';
+            document.getElementById('fat-display').innerText = fat + 'g';
         }
 
         window.onload = () => {
