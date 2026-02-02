@@ -158,8 +158,46 @@
                 <span id="display-day">LUNES</span>: <span class="text-red-500" id="display-focus">TREN SUPERIOR</span>
             </h2>
 
-            <div id="exercise-list" class="space-y-4">
+            <div id="exercise-list" class="space-y-6">
                 <!-- Exercises will be rendered here -->
+            </div>
+        </div>
+
+        <!-- Senior Specific Nutrition Advice (Visible only in senior tab) -->
+        <div id="senior-nutrition-view" class="hidden space-y-6 animate-fade mb-10">
+            <div class="glass-card p-6 border-l-4 border-gold-500">
+                <h3 class="text-2xl font-black text-gold-500 uppercase italic mb-4">Nutrición Senior Elite</h3>
+                <p class="text-[11px] text-gray-400 mb-4 uppercase font-black tracking-widest">Objetivo: Combatir
+                    Sarcopenia y Ganar Masa Muscular</p>
+
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                        <label class="text-[9px] font-black text-gray-500 uppercase block mb-1">Peso (lb)</label>
+                        <input type="number" id="senior-weight" value="160" oninput="calculateSeniorMacros()"
+                            class="w-full bg-transparent text-xl font-black text-white outline-none">
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                        <label class="text-[9px] font-black text-gray-500 uppercase block mb-1">Estatura (cm)</label>
+                        <input type="number" id="senior-height" value="170" oninput="calculateSeniorMacros()"
+                            class="w-full bg-transparent text-xl font-black text-white outline-none">
+                    </div>
+                </div>
+
+                <div id="senior-macros-res" class="space-y-3">
+                    <!-- Dynamic results here -->
+                </div>
+            </div>
+
+            <div class="glass-card p-6 bg-gold-500/5">
+                <h4 class="text-xs font-black text-gold-500 uppercase mb-2">Consejos de Oro (+60)</h4>
+                <ul class="text-[12px] space-y-2 text-gray-300">
+                    <li>● <b class="text-white">Proteína Alta:</b> Mínimo 1.2g - 1.5g por kilo para crear músculo nuevo.
+                    </li>
+                    <li>● <b class="text-white">Leucina:</b> Priorizar huevos y lácteos para activar la síntesis
+                        muscular.</li>
+                    <li>● <b class="text-white">Hidratación:</b> Beber agua aunque no se tenga sed, vital para los
+                        discos intervertebrales.</li>
+                </ul>
             </div>
         </div>
 
@@ -365,11 +403,27 @@
         }
 
         function render() {
-            if (state.tab === 'diet') return;
-
             const list = document.getElementById('exercise-list');
             const displayFocus = document.getElementById('display-focus');
             const displayDay = document.getElementById('display-day');
+            const seniorNutView = document.getElementById('senior-nutrition-view');
+            const trainingView = document.getElementById('training-view');
+            const dietView = document.getElementById('diet-view');
+
+            if (state.tab === 'diet') {
+                trainingView.classList.add('hidden');
+                seniorNutView.classList.add('hidden');
+                dietView.classList.remove('hidden');
+                return;
+            } else if (state.tab === 'senior') {
+                seniorNutView.classList.remove('hidden');
+                calculateSeniorMacros();
+            } else {
+                seniorNutView.classList.add('hidden');
+            }
+
+            trainingView.classList.remove('hidden');
+            dietView.classList.add('hidden');
 
             const data = workoutData[state.tab][state.day] || { focus: "DESCANSO", exercises: [] };
 
@@ -378,21 +432,9 @@
 
             if (data.exercises.length === 0) {
                 list.innerHTML = `<div class="glass-card p-10 text-center text-gray-500 uppercase font-black text-xl italic tracking-widest">Día de Recuperación</div>`;
-                // Clear diet suggestion if it's a rest day and no specific diet is provided
-                const dietMenu = document.querySelector('#diet-view .glass-card:last-child div.space-y-3');
-                if (dietMenu) {
-                    dietMenu.innerHTML = `<div class="p-3 bg-white/5 rounded-xl border-l-2 border-white/20"><b class="text-xs text-white block">Sugerencia Jeremy:</b><span class="text-xs text-gray-400">Día de recuperación, enfócate en hidratación y nutrición balanceada.</span></div>`;
-                }
                 return;
             }
 
-            // Actualizar menú de dieta dinámico si existe en la data
-            if (data.diet) {
-                const dietMenu = document.querySelector('#diet-view .glass-card:last-child div.space-y-3');
-                if (dietMenu) {
-                    dietMenu.innerHTML = `<div class="p-3 bg-white/5 rounded-xl border-l-2 border-gold-500"><b class="text-xs text-white block">Sugerencia Jeremy:</b><span class="text-xs text-gray-400">${data.diet}</span></div>`;
-                }
-            }
             list.innerHTML = data.exercises.map((ex, idx) => {
                 const exerciseKey = `${state.tab}_${state.day}_${idx}`;
                 const saved = state.history[exerciseKey] || { weight: '', checked: false };
@@ -400,38 +442,38 @@
                 const nextWeek = saved.weight && saved.checked ? Math.round(parseFloat(saved.weight) * 1.05) : '--';
 
                 return `
-                <div class="glass-card p-4 animate-fade border-l-4 ${state.tab === 'pro' ? 'border-red-500' : 'border-gold-500'}">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="flex-1 pr-2">
-                             <div class="flex items-center gap-2 mb-1">
-                                <div onclick="toggleCheck('${exerciseKey}')" class="check-btn ${saved.checked ? 'checked' : ''}">
-                                    <i class="fas fa-check text-white text-[10px] ${saved.checked ? '' : 'hidden'}"></i>
+                <div class="glass-card p-6 animate-fade border-l-4 ${state.tab === 'pro' ? 'border-red-500' : 'border-gold-500'}">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex-1 pr-4">
+                             <div class="flex items-center gap-3 mb-2">
+                                <div onclick="toggleCheck('${exerciseKey}')" class="check-btn w-8 h-8 ${saved.checked ? 'checked' : ''}">
+                                    <i class="fas fa-check text-white text-sm ${saved.checked ? '' : 'hidden'}"></i>
                                 </div>
-                                <h4 class="text-lg font-black text-white uppercase leading-tight">${ex.name}</h4>
+                                <h4 class="text-2xl font-black text-white uppercase leading-tight">${ex.name}</h4>
                             </div>
-                            <div class="flex items-center gap-2">
-                                <span class="bg-white/10 text-white text-[10px] font-black px-2 py-0.5 rounded uppercase">${ex.reps}</span>
-                                <span class="text-[8px] uppercase font-bold text-gray-500 tracking-widest">${ex.tech}</span>
+                            <div class="flex items-center gap-3">
+                                <span class="bg-white/10 text-white text-xs font-black px-3 py-1 rounded uppercase">${ex.reps}</span>
+                                <span class="text-[10px] uppercase font-bold text-gray-500 tracking-widest">${ex.tech}</span>
                             </div>
                         </div>
-                        <a href="https://www.youtube.com/results?search_query=ejercicio+${ex.name.replace(/ /g, '+')}" target="_blank" class="w-10 h-10 bg-white/5 text-white rounded-full flex items-center justify-center border border-white/10">
-                            <i class="fas fa-play text-[10px]"></i>
+                        <a href="https://www.youtube.com/results?search_query=ejercicio+${ex.name.replace(/ /g, '+')}" target="_blank" class="w-12 h-12 bg-white/5 text-white rounded-full flex items-center justify-center border border-white/10 shadow-lg">
+                            <i class="fas fa-play text-xs"></i>
                         </a>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-2">
-                        <div class="bg-black/20 p-2 rounded-xl text-center">
-                            <span class="text-[8px] text-gray-500 block uppercase font-black">Anterior</span>
-                            <span class="text-sm font-black text-white">${lastWeight} <small class="text-[8px] text-gray-600">LB</small></span>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="bg-black/40 p-3 rounded-2xl text-center">
+                            <span class="text-[10px] text-gray-500 block uppercase font-black mb-1">Anterior</span>
+                            <span class="text-2xl font-black text-white">${lastWeight} <small class="text-xs text-gray-600">LB</small></span>
                         </div>
-                        <div class="bg-white/5 p-2 rounded-xl text-center border border-white/10">
-                            <span class="text-[8px] text-gold-500 block uppercase font-black">Hoy (LB)</span>
+                        <div class="bg-white/5 p-3 rounded-2xl text-center border-2 border-white/10">
+                            <span class="text-[10px] text-gold-500 block uppercase font-black mb-1">Hoy (LB)</span>
                             <input type="number" value="${saved.weight}" oninput="saveWeight('${exerciseKey}', this.value)" 
-                                placeholder="0" class="w-full bg-transparent text-center font-black text-white outline-none text-sm">
+                                placeholder="0" class="w-full bg-transparent text-center font-black text-white outline-none text-2xl">
                         </div>
-                        <div class="bg-black/20 p-2 rounded-xl text-center">
-                            <span class="text-[8px] text-cyan-500 block uppercase font-black">Sig. Sem</span>
-                            <span class="text-sm font-black text-cyan-500">${nextWeek} <small class="text-[8px] text-gray-600">LB</small></span>
+                        <div class="bg-black/40 p-3 rounded-2xl text-center">
+                            <span class="text-[10px] text-cyan-500 block uppercase font-black mb-1">Sig. Sem</span>
+                            <span class="text-2xl font-black text-cyan-500">${nextWeek} <small class="text-xs text-gray-600">LB</small></span>
                         </div>
                     </div>
                 </div>
@@ -460,6 +502,24 @@
             alert('¡Enviando datos! (Para conectar a tu Google Sheets personal, contacta con soporte para vincular tu Webhook de n8n o Google Script).');
             // Aquí iría el fetch a una URL de Google Apps Script o n8n
             console.log("Datos para sincronizar:", state.history);
+        }
+
+        function calculateSeniorMacros() {
+            const w = document.getElementById('senior-weight').value;
+            if (!w) return;
+            const protein = Math.round(w * 1.0); // 1g por lb para seniors ganando musculo
+            const cals = Math.round(w * 14);     // Mantenimiento + ligero superavit
+
+            document.getElementById('senior-macros-res').innerHTML = `
+                <div class="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/10">
+                    <span class="text-[10px] font-black text-gray-400 uppercase">Kcal Recomendadas</span>
+                    <span class="text-xl font-black text-white">${cals} Kcal</span>
+                </div>
+                <div class="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/10">
+                    <span class="text-[10px] font-black text-red-500 uppercase">Proteína Objetivo</span>
+                    <span class="text-xl font-black text-red-500">${protein}g</span>
+                </div>
+            `;
         }
 
         function calculateCals() {
