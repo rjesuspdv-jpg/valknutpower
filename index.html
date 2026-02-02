@@ -2,177 +2,116 @@
 <html lang="es">
 
 <head>
+    <!-- VALKNUTPOWER v1.1 - Force Build -->
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>VALKNUTPOWER - Personal Multi-Profile App</title>
+    <title>VALKNUTPOWER - Elite Training System</title>
 
-    <!-- Google Fonts: Outfit -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json?v=3">
+    <link rel="icon" type="image/png" href="logo.png?v=3">
+    <meta name="theme-color" content="#0a0a0c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="logo.png?v=3">
+    <meta name="apple-mobile-web-app-title" content="VALKNUT">
 
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root {
-            --bg-black: #0a0a0c;
-            --card-gray: #141417;
-            --brand-red: #D94343;
-            --brand-red-glow: rgba(217, 67, 67, 0.4);
-            --brand-gold: #D4AF37;
-            --brand-gold-glow: rgba(212, 175, 55, 0.4);
-            --brand-cyan: #00f2ff;
-            --text-main: #ffffff;
-            --text-muted: #88888b;
-            --safe-green: #10b981;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
+        :root {
+            --brand-red: #D94343;
+            --brand-dark: #0a0a0c;
+            --cyan: #00f2ff;
+            --gold: #FFD700;
         }
 
         body {
-            background-color: var(--bg-black);
-            color: var(--text-main);
-            font-family: 'Outfit', sans-serif;
-            line-height: 1.5;
-            padding-bottom: 40px;
-        }
-
-        /* --- UI Components --- */
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-top: 20px;
-        }
-
-        .logo {
-            font-size: 2.5rem;
-            font-weight: 900;
-            font-style: italic;
-            letter-spacing: -2px;
-            text-transform: uppercase;
-        }
-
-        .logo span {
-            color: var(--brand-red);
-        }
-
-        /* Profile Selector Overlay */
-        .profile-selector-wrap {
-            position: relative;
-            margin-bottom: 25px;
-        }
-
-        select {
-            width: 100%;
-            background: var(--card-gray);
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            font-family: 'Outfit', -apple-system, sans-serif;
+            background-color: var(--brand-dark);
             color: white;
-            padding: 15px;
-            border-radius: 16px;
-            font-size: 1rem;
-            font-weight: 700;
-            appearance: none;
-            cursor: pointer;
-            transition: all 0.3s;
+            margin: 0;
+            padding-bottom: 80px;
         }
 
-        select:focus {
-            outline: none;
-            border-color: var(--brand-red);
-            box-shadow: 0 0 15px var(--brand-red-glow);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
         }
 
-        /* Toggle Switch */
-        .status-toggle {
+        .nav-tab {
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 12px;
+            text-transform: uppercase;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #666;
+            border: 1px solid transparent;
+        }
+
+        .nav-tab.active {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .check-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            background: var(--card-gray);
-            padding: 15px 20px;
-            border-radius: 16px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .toggle-label {
-            font-weight: 900;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-        }
-
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 30px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
+            justify-content: center;
+            transition: all 0.2s;
             cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #333;
-            transition: .4s;
-            border-radius: 34px;
         }
 
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 22px;
-            width: 22px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
+        .check-btn.checked {
+            background: #10b981;
+            border-color: #10b981;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .day-btn {
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 12px;
+            transition: all 0.2s;
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
-        input:checked+.slider {
-            background-color: var(--safe-green);
+        .day-btn.active {
+            border-color: var(--brand-red);
+            background: var(--brand-red);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(217, 67, 67, 0.4);
         }
 
-        input:checked+.slider:before {
-            transform: translateX(30px);
-        }
-
-        /* Cards */
-        .card {
-            background: var(--card-gray);
-            border-radius: 24px;
-            padding: 24px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            animation: slideUp 0.5s ease-out;
-        }
-
-        @keyframes slideUp {
+        /* Animations */
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(10px);
             }
 
             to {
@@ -181,437 +120,445 @@
             }
         }
 
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 18px;
-        }
-
-        .card-header i {
-            color: var(--brand-red);
-            font-size: 1.2rem;
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Macro Pills */
-        .macro-grid {
-            display: grid;
-            grid-cols: 3;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .macro-pill {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 12px 5px;
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .macro-val {
-            display: block;
-            font-size: 1.2rem;
-            font-weight: 900;
-        }
-
-        .macro-tag {
-            font-size: 0.6rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        /* Training List */
-        .exercise-item {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 4px solid var(--brand-red);
-        }
-
-        .ex-info h4 {
-            font-weight: 900;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
-
-        .ex-info span {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        /* Alerts & Warnings */
-        .alert-box {
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .alert-rest {
-            background: rgba(217, 67, 67, 0.1);
-            border: 1px solid var(--brand-red);
-            color: var(--brand-red);
-        }
-
-        .alert-train {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid var(--safe-green);
-            color: var(--safe-green);
-        }
-
-        /* Anchor Rule Section */
-        .anchor-card {
-            background: linear-gradient(135deg, #1e1e22 0%, #0a0a0c 100%);
-            border: 1px solid var(--brand-gold);
-        }
-
-        .anchor-card b {
-            color: var(--brand-gold);
-        }
-
-        /* Score Tracker */
-        .score-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 8px 0;
-            cursor: pointer;
-        }
-
-        .score-check {
-            width: 24px;
-            height: 24px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-
-        .score-check.checked {
-            background: var(--safe-green);
-            border-color: var(--safe-green);
-        }
-
-        .score-check i {
-            display: none;
-            font-size: 0.8rem;
-        }
-
-        .score-check.checked i {
-            display: block;
-        }
-
-        .score-label {
-            font-size: 0.9rem;
-            font-weight: 400;
-        }
-
-        .score-display {
-            text-align: center;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .score-num {
-            font-size: 3rem;
-            font-weight: 900;
-            color: var(--brand-cyan);
-            display: block;
-            line-height: 1;
-        }
-
-        .score-msg {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            font-weight: 900;
-            margin-top: 5px;
-        }
-
-        .hidden {
-            display: none !important;
+        .animate-fade {
+            animation: fadeIn 0.4s ease-out forwards;
         }
     </style>
 </head>
 
-<body>
-    <div class="container">
-        <header>
-            <div class="logo">VALKNUT<span>POWER</span></div>
-            <p
-                style="font-size: 0.7rem; text-transform: uppercase; tracking: 3px; color: var(--text-muted); font-weight: 700;">
-                Performance & Longevity</p>
-        </header>
+<body class="antialiased">
 
-        <!-- Selector de Perfil -->
-        <div class="profile-selector-wrap">
-            <label
-                style="position: absolute; top: -10px; left: 15px; background: var(--bg-black); padding: 0 8px; font-size: 0.6rem; font-weight: 900; color: var(--brand-red); z-index: 2;">WHO
-                ARE YOU TODAY?</label>
-            <select id="user-select" onchange="updateUI()">
-                <option value="beast">BEAST MODE (Jesus & Amigo)</option>
-                <option value="fitness">FITNESS (Esposa)</option>
-                <option value="senior">SENIOR ELITE (Suegros)</option>
-            </select>
+    <!-- Top Navigation Tabs -->
+    <header class="sticky top-0 z-50 bg-black/90 backdrop-blur-xl border-b border-white/10 px-4 py-4">
+        <div class="max-w-xl mx-auto flex flex-col items-center gap-4">
+            <div class="flex flex-col items-center gap-2">
+                <img src="logo.png?v=3" alt="Valknut Logo"
+                    class="w-20 h-20 shadow-2xl rounded-2xl border border-white/5">
+                <h1 class="text-3xl font-black italic tracking-tighter">VALKNUT<span class="text-red-500">POWER</span>
+                </h1>
+            </div>
+
+            <nav class="flex w-full justify-between items-center bg-white/5 p-1 rounded-2xl border border-white/10">
+                <button onclick="setTab('pro')" id="tab-pro" class="nav-tab flex-1 active">Valknut Pro</button>
+                <button onclick="setTab('senior')" id="tab-senior" class="nav-tab flex-1">Senior +60</button>
+                <button onclick="setTab('diet')" id="tab-diet" class="nav-tab flex-1">Nutrición</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-xl mx-auto px-4 py-6">
+
+        <!-- Training View -->
+        <div id="training-view" class="space-y-6">
+            <!-- Day Selector (L-V) -->
+            <div class="flex justify-between items-center bg-white/5 p-2 rounded-full border border-white/10"
+                id="day-selector">
+                <button onclick="setDay(0)" class="day-btn active">LUN</button>
+                <button onclick="setDay(1)" class="day-btn">MAR</button>
+                <button onclick="setDay(2)" class="day-btn">MIE</button>
+                <button onclick="setDay(3)" class="day-btn">JUE</button>
+                <button onclick="setDay(4)" class="day-btn">VIE</button>
+            </div>
+
+            <h2 class="text-2xl font-black italic uppercase text-center border-b border-white/5 pb-4">
+                <span id="display-day">LUNES</span>: <span class="text-red-500" id="display-focus">TREN SUPERIOR</span>
+            </h2>
+
+            <div id="exercise-list" class="space-y-6">
+                <!-- Exercises will be rendered here -->
+            </div>
         </div>
 
-        <!-- Training Switch -->
-        <div class="status-toggle">
-            <span class="toggle-label" id="status-text">MODO DESCANSO</span>
-            <label class="switch">
-                <input type="checkbox" id="training-toggle" onchange="updateUI()">
-                <span class="slider"></span>
-            </label>
+        <!-- Senior Specific Nutrition Advice (Visible only in senior tab) -->
+        <div id="senior-nutrition-view" class="hidden space-y-6 animate-fade mb-10">
+            <div class="glass-card p-6 border-l-4 border-gold-500">
+                <h3 class="text-2xl font-black text-gold-500 uppercase italic mb-4">Nutrición Senior Elite</h3>
+                <p class="text-[11px] text-gray-400 mb-4 uppercase font-black tracking-widest">Objetivo: Combatir
+                    Sarcopenia y Ganar Masa Muscular</p>
+
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                        <label class="text-[9px] font-black text-gray-500 uppercase block mb-1">Peso (lb)</label>
+                        <input type="number" id="senior-weight" value="160" oninput="calculateSeniorMacros()"
+                            class="w-full bg-transparent text-xl font-black text-white outline-none">
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                        <label class="text-[9px] font-black text-gray-500 uppercase block mb-1">Estatura (cm)</label>
+                        <input type="number" id="senior-height" value="170" oninput="calculateSeniorMacros()"
+                            class="w-full bg-transparent text-xl font-black text-white outline-none">
+                    </div>
+                </div>
+
+                <div id="senior-macros-res" class="space-y-3">
+                    <!-- Dynamic results here -->
+                </div>
+            </div>
+
+            <div class="glass-card p-6 bg-gold-500/5">
+                <h4 class="text-xs font-black text-gold-500 uppercase mb-2">Consejos de Oro (+60)</h4>
+                <ul class="text-[12px] space-y-2 text-gray-300">
+                    <li>● <b class="text-white">Proteína Alta:</b> Mínimo 1.2g - 1.5g por kilo para crear músculo nuevo.
+                    </li>
+                    <li>● <b class="text-white">Leucina:</b> Priorizar huevos y lácteos para activar la síntesis
+                        muscular.</li>
+                    <li>● <b class="text-white">Hidratación:</b> Beber agua aunque no se tenga sed, vital para los
+                        discos intervertebrales.</li>
+                </ul>
+            </div>
         </div>
 
-        <!-- Dashboard Dynamico -->
-        <div id="dynamic-content">
+        <!-- Nutrition View (Hidden by default) -->
+        <div id="diet-view" class="hidden space-y-6 animate-fade">
+            <div class="glass-card p-6 border-l-4 border-cyan-400">
+                <h3 class="text-2xl font-black text-cyan-400 uppercase italic mb-4">Protocolo Jesus</h3>
 
-            <!-- Card 1: Macros o Info Base -->
-            <div class="card" id="macros-card">
-                <div class="card-header">
-                    <i class="fas fa-fire"></i>
-                    <span class="card-title">Protocolo Nutricional</span>
-                </div>
-                <div id="macros-ui">
-                    <div class="macro-grid">
-                        <div class="macro-pill"><span class="macro-val" id="kcal">---</span><span
-                                class="macro-tag">Kcal</span></div>
-                        <div class="macro-pill"><span class="macro-val" id="prot">---</span><span
-                                class="macro-tag">Proteína</span></div>
-                        <div class="macro-pill"><span class="macro-val" id="fat">---</span><span
-                                class="macro-tag">Grasas</span></div>
+                <!-- Macros Display -->
+                <div class="grid grid-cols-3 gap-3 mb-6">
+                    <div class="bg-white/5 p-3 rounded-2xl border border-white/10 text-center">
+                        <span id="protein-display" class="block text-2xl font-black text-red-500">250g</span>
+                        <span class="text-[9px] font-black text-gray-500 uppercase">Proteína</span>
+                    </div>
+                    <div class="bg-white/5 p-3 rounded-2xl border border-white/10 text-center">
+                        <span id="carbs-display" class="block text-2xl font-black text-cyan-500">180g</span>
+                        <span class="text-[9px] font-black text-gray-500 uppercase">Carbohidratos</span>
+                    </div>
+                    <div class="bg-white/5 p-3 rounded-2xl border border-white/10 text-center">
+                        <span id="fat-display" class="block text-2xl font-black text-gold-500">70g</span>
+                        <span class="text-[9px] font-black text-gray-500 uppercase">Grasas</span>
                     </div>
                 </div>
-                <!-- Alerta Nutricional Dinamica -->
-                <div id="nutrition-alert" class="alert-box"></div>
-            </div>
 
-            <!-- Card 2: Reglas Especiales / La Regla del Ancla -->
-            <div class="card anchor-card">
-                <div class="card-header">
-                    <i class="fas fa-anchor" style="color: var(--brand-gold);"></i>
-                    <span class="card-title" style="color: var(--brand-gold);">La Regla del Ancla</span>
-                </div>
-                <p style="font-size: 0.85rem; font-style: italic;">"Si no ves una fuente de <b>Proteína</b> clara en tu
-                    plato, esa comida no cuenta. Ancla tu nutrición a la proteína primero."</p>
-            </div>
+                <div class="flex flex-col gap-4 mb-6">
+                    <div class="bg-black/40 px-6 py-4 rounded-2xl border border-white/10 text-center">
+                        <span id="cal-display" class="block text-5xl font-black text-white">2350</span>
+                        <span class="text-[10px] font-black text-gray-500 uppercase tracking-widest">kcal
+                            objetivo</span>
+                    </div>
 
-            <!-- Card 3: Rutina de Entrenamiento -->
-            <div class="card" id="training-card">
-                <div class="card-header">
-                    <i class="fas fa-dumbbell"></i>
-                    <span class="card-title">Rutina del Día</span>
+                    <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
+                        <label class="text-[10px] font-black text-gold-500 uppercase block mb-2 text-center">Ajustar por
+                            Peso Local (lb)</label>
+                        <div class="flex gap-2">
+                            <input type="number" id="weight-input" value="291" oninput="calculateCals()"
+                                class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2 text-center font-bold outline-none focus:border-gold-500 transition">
+                        </div>
+                    </div>
                 </div>
-                <div id="routine-list">
-                    <!-- Ejercicios aqui -->
-                </div>
-                <div id="beast-rules" class="hidden"
-                    style="margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05);">
-                    <h5 style="color: var(--brand-cyan); font-weight: 900; font-size: 0.7rem; text-transform: uppercase;"
-                        class="mb-2">Control de Cortisol</h5>
-                    <ul style="font-size: 0.75rem; color: var(--text-muted); list-style: none;">
-                        <li>● No cafeína después de las 4:00 PM</li>
-                        <li>● En cama a las 10:30 PM (No excepciones)</li>
-                    </ul>
-                </div>
-            </div>
 
-            <!-- Card 4: Daily Score -->
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-trophy"></i>
-                    <span class="card-title">VALKNUT DAILY SCORE</span>
-                </div>
-                <div class="score-items">
-                    <div class="score-item" onclick="toggleScoreCheck(this, 20)">
-                        <div class="score-check"><i class="fas fa-check"></i></div>
-                        <span class="score-label">Dormí antes de las 10:30 PM</span>
+                <div class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white/5 p-4 rounded-2xl border-t-2 border-cyan-500">
+                            <span class="text-[10px] font-black text-cyan-500 uppercase block mb-1">PRE-ENTRENO</span>
+                            <p class="text-[11px] text-gray-300">1 scoop Amino Energy + 1 Fruta (Plátano/Manzana)</p>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-2xl border-t-2 border-red-500">
+                            <span class="text-[10px] font-black text-red-500 uppercase block mb-1">POST-ENTRENO</span>
+                            <p class="text-[11px] text-gray-300">1 scoop ISO100 + 1 Fruta o Miel (Recuperación)</p>
+                        </div>
                     </div>
-                    <div class="score-item" onclick="toggleScoreCheck(this, 20)">
-                        <div class="score-check"><i class="fas fa-check"></i></div>
-                        <span class="score-label">Completé mis 6 botellas de agua</span>
+
+                    <div class="bg-white/5 p-4 rounded-2xl">
+                        <span class="text-xs font-black text-gold-500 uppercase block mb-2">Suplementación Élite</span>
+                        <ul class="text-sm space-y-2 text-gray-300">
+                            <li>● <b class="text-white">Creatina:</b> 5g (1 scoop) diario sin falta</li>
+                            <li>● <b class="text-white">Hidratación:</b> Lipton Iced Tea Mix + Agua</li>
+                        </ul>
                     </div>
-                    <div class="score-item" onclick="toggleScoreCheck(this, 20)">
-                        <div class="score-check"><i class="fas fa-check"></i></div>
-                        <span class="score-label">Cero azúcar / alcohol</span>
-                    </div>
-                    <div class="score-item" onclick="toggleScoreCheck(this, 20)">
-                        <div class="score-check"><i class="fas fa-check"></i></div>
-                        <span class="score-label">Entrenamiento completado</span>
-                    </div>
-                    <div class="score-item" onclick="toggleScoreCheck(this, 20)">
-                        <div class="score-check"><i class="fas fa-check"></i></div>
-                        <span class="score-label">Proteína en cada comida</span>
-                    </div>
-                </div>
-                <div class="score-display">
-                    <span class="score-num" id="total-score">0%</span>
-                    <span class="score-msg" id="score-feedback">Disciplina es Libertad</span>
                 </div>
             </div>
 
+            <div class="glass-card p-6">
+                <h4 class="text-sm font-black text-gray-400 uppercase mb-4 tracking-widest">Sync Automática</h4>
+                <button onclick="syncToSheets()"
+                    class="w-full bg-green-600 hover:bg-green-700 text-white font-black py-4 rounded-2xl transition flex items-center justify-center gap-3">
+                    <i class="fas fa-file-excel"></i>
+                    GUARDAR EN GOOGLE SHEETS
+                </button>
+                <p class="text-[9px] text-center text-gray-600 mt-2 uppercase font-black">Historial guardado localmente
+                    hasta sincronizar</p>
+            </div>
         </div>
-    </div>
+
+    </main>
 
     <script>
-        // --- Data Layer ---
-        const USER_DATA = {
-            beast: {
-                name: "BEAST MODE",
-                macros: { training: { kcal: 2600, prot: "220g", fat: "70g" }, rest: { kcal: 2100, prot: "240g", fat: "80g" } },
-                routine: [
-                    { name: "Press Inclinado Smith", sets: "4x8 (RIR 1)" },
-                    { name: "Remo Heavy Hammer", sets: "4x10 (RIR 1)" },
-                    { name: "Prensa Vertical", sets: "3x12 (Fallo)" }
-                ],
-                showBeastRules: true
-            },
-            fitness: {
-                name: "FITNESS",
-                macros: { training: { kcal: 1800, prot: "140g", fat: "55g" }, rest: { kcal: 1500, prot: "150g", fat: "60g" } },
-                routine: [
-                    { name: "Hip Thrust", sets: "3x12" },
-                    { name: "Sentadilla Goblet", sets: "3x15" },
-                    { name: "Jalón al pecho", sets: "3x12" }
-                ],
-                showBeastRules: false
-            },
-            senior: {
-                name: "SENIOR ELITE",
-                macros: null, // Sin macros estrictos
-                routine: [
-                    { name: "Prensa Horizontal", sets: "2x12" },
-                    { name: "Chest Press Máquina", sets: "2x12" },
-                    { name: "Remo Sentado", sets: "2x12" },
-                    { name: "Caminata Banda", sets: "10 min" }
-                ],
-                showBeastRules: false
-            }
+        let state = {
+            tab: 'pro',
+            day: new Date().getDay() === 0 || new Date().getDay() === 6 ? 0 : new Date().getDay() - 1,
+            history: JSON.parse(localStorage.getItem('valknut_history')) || {}
         };
 
-        let currentPoints = 0;
-
-        // --- Core Logic ---
-        function updateUI() {
-            const userKey = document.getElementById('user-select').value;
-            const isTraining = document.getElementById('training-toggle').checked;
-            const user = USER_DATA[userKey];
-
-            // 1. Update Header Status
-            const statusText = document.getElementById('status-text');
-            statusText.innerText = isTraining ? "MODO TRAINING + CARBS" : "MODO DESCANSO / RECOVERY";
-            statusText.style.color = isTraining ? "var(--safe-green)" : "var(--text-muted)";
-
-            // 2. Update Macros
-            const macrosUI = document.getElementById('macros-ui');
-            const nutAlert = document.getElementById('nutrition-alert');
-
-            if (user.macros) {
-                macrosUI.classList.remove('hidden');
-                const m = isTraining ? user.macros.training : user.macros.rest;
-                document.getElementById('kcal').innerText = m.kcal;
-                document.getElementById('prot').innerText = m.prot;
-                document.getElementById('fat').innerText = m.fat;
-
-                // Nut Alerte Logic
-                if (isTraining) {
-                    nutAlert.className = "alert-box alert-train";
-                    nutAlert.innerHTML = `<i class="fas fa-check-circle"></i> PERMITIDO: Té Lipton, Plátano Post-Entreno y Carbohidrato denso.`;
-                } else {
-                    nutAlert.className = "alert-box alert-rest";
-                    nutAlert.innerHTML = `<i class="fas fa-exclamation-triangle"></i> PROHIBIDO: Té Lipton azucarado. Solo Agua/Amino. Cero carbs densos.`;
+        const workoutData = {
+            pro: [
+                {
+                    focus: "PECHO & HOMBROS (EMPUJE)", exercises: [
+                        { name: "Banca Inclinada Smith", reps: "2x15, 2x8 (MAX)", tech: "Técnica 10/25", notes: "Pedro Colina: 30 grados. Máxima tensión muscular." },
+                        { name: "Banca Plana Mancuernas", reps: "3x10", tech: "Carga Progresiva", notes: "Jeremy Ethier: Baja en 3 segundos, sube explosivo." },
+                        { name: "Elevación Lateral Mancuerna", reps: "3x15", tech: "Doble Drop Set", notes: "Hombros redondos. 90s de descanso entre series." },
+                        { name: "Cardio LISS", reps: "30 min", tech: "Quema Grasa", notes: "Caminata rápida tras las pesas." }
+                    ], diet: "Pre: Amino + Fruta. Post: ISO100 + Arroz/Papa."
+                },
+                {
+                    focus: "PIERNA A (CUÁDRICEPS FOCUS)", exercises: [
+                        { name: "Sentadilla Smith / Libre", reps: "4x12, 10, 8, 8", tech: "Pirámide", notes: "Construcción de masa base. Controla la profundidad." },
+                        { name: "Extensión Rodilla (Máquina)", reps: "3 sets", tech: "Triple Drop Set", notes: "Sostiene 5s en la última rep. Quema asegurada." },
+                        { name: "Prensa Pesada", reps: "4 sets", tech: "Drop Set + Rest Pause", notes: "Pies abajo para más cuádriceps." },
+                        { name: "Cardio LISS", reps: "30 min", tech: "Quema Grasa", notes: "Suave para no sobrecargar." }
+                    ], diet: "Día de carga. Carne roja y boniato."
+                },
+                {
+                    focus: "ESPALDA & BÍCEPS (JALÓN)", exercises: [
+                        { name: "Jalón Polea Agarre Cerrado", reps: "4x8", tech: "Rest Pause", notes: "Enfoque en amplitud dorsal." },
+                        { name: "Remo en Máquina Individual", reps: "2x10", tech: "Biserie", notes: "Aprieta escápulas 2s atrás." },
+                        { name: "Curl Barra Z + Martillo", reps: "3x12", tech: "Drop Set", notes: "Bíceps masivos. No balancees el cuerpo." },
+                        { name: "Cardio LISS", reps: "30 min", tech: "Quema Grasa", notes: "Mantén zona 2." }
+                    ], diet: "Pollo con pasta integral y ensalada."
+                },
+                {
+                    focus: "PIERNA B (FEMORAL & GLÚTEO)", exercises: [
+                        { name: "Femoral Sentado/Acostado", reps: "7x10", tech: "Técnica 10/25", notes: "Frecuencia 2 para piernas masivas." },
+                        { name: "Serie Gigante (Hack/Zancada/Ext)", reps: "3 series", tech: "GIGANTE", notes: "El infierno de Colina: Hack 6 + Zancadas 25 + Ext 12." },
+                        { name: "Peso Muerto Piernas Rígidas", reps: "3x12", tech: "Estiramiento", notes: "Estira femoral al máximo. Baja lento." },
+                        { name: "Cardio LISS", reps: "30 min", tech: "Quema Grasa", notes: "Drenaje láctico." }
+                    ], diet: "Post-pierna: Recuperación alta en hidratos."
+                },
+                {
+                    focus: "BRAZOS, TRÍCEPS & DETALLE", exercises: [
+                        { name: "Copal/Francés + Dips", reps: "4x12", tech: "Biserie", notes: "Tríceps potentes. Dips en máquina." },
+                        { name: "Laterales en Polea Acostado", reps: "3x20", tech: "Triple Drop Set", notes: "Congestión final del deltoide." },
+                        { name: "Cruce Polea Alta", reps: "4x15", tech: "Drop Set", notes: "Pecho superior y hombro posterior." },
+                        { name: "Cardio LISS", reps: "30 min", tech: "Quema Grasa", notes: "Cierre de semana perfecto." }
+                    ], diet: "Huevos con aguacate y pan integral."
                 }
+            ],
+            senior: [
+                {
+                    focus: "GYM & MÁQUINAS (FUERZA BASE)", exercises: [
+                        { name: "Leg Press (Máquina)", reps: "3x12", tech: "Control", notes: "Gana masa en piernas. Empuje lento." },
+                        { name: "Chest Press (Máquina)", reps: "3x12", tech: "Tensión", notes: "Pecho y tríceps sin riesgo de hombro." },
+                        { name: "Seated Row (Máquina)", reps: "3x12", tech: "Postura", notes: "Espalda fuerte para evitar encorvamiento." },
+                        { name: "Máquina Osciladora", reps: "5 min", tech: "Vibración", notes: "Mejora circulación y densidad ósea final." }
+                    ]
+                },
+                {
+                    focus: "CALISTENIA & BANDAS (MOVILIDAD)", exercises: [
+                        { name: "Sentadilla con Bandas (Ligas)", reps: "3x15", tech: "Resistencia", notes: "Coloca la liga arriba de rodillas." },
+                        { name: "Remo con Ligas (Sentado)", reps: "3x15", tech: "Retracción", notes: "Tira hacia el abdomen, espalda recta." },
+                        { name: "Flexiones en Barra/Pared", reps: "3x12", tech: "Peso Corporal", notes: "Calistenia segura para empuje." },
+                        { name: "Step Ups (Escalón)", reps: "3x12", tech: "Equilibrio", notes: "Sube un escalón controlado." }
+                    ]
+                },
+                {
+                    focus: "GYM POTENCIA (MÁQUINAS)", exercises: [
+                        { name: "Lat Pulldown (Máquina)", reps: "3x12", tech: "Amplitud", notes: "Fortalece espalda alta." },
+                        { name: "Shoulder Press (Máquina)", reps: "3x12", tech: "Vertical", notes: "Hombros fuertes para movilidad." },
+                        { name: "Leg Extension (Máquina)", reps: "3x15", tech: "Aislamiento", notes: "Masa muscular en cuádriceps." },
+                        { name: "Máquina Osciladora (Core)", reps: "3 min", tech: "Estabilidad", notes: "Mantén abdomen contraído." }
+                    ]
+                },
+                {
+                    focus: "BANDAS & CABLES (HIPERTROFIA)", exercises: [
+                        { name: "Curls de Bíceps con Ligas", reps: "3x15", tech: "Bombeo", notes: "Tensión constante en brazos." },
+                        { name: "Face Pulls (Cables)", reps: "3x15", tech: "Salud Hombro", notes: "Crucial para la masa posterior." },
+                        { name: "Prensa de Piernas (Horizontal)", reps: "3x12", tech: "Fuerza", notes: "Foco en glúteo y femoral." },
+                        { name: "Extensiones Tríceps (Ligas)", reps: "3x15", tech: "Control", notes: "Brazos fuertes." }
+                    ]
+                },
+                {
+                    focus: "CIRCUITO GYM HYBRID (FINAL)", exercises: [
+                        { name: "Abdominales en Máquina", reps: "3x15", tech: "Core", notes: "Protege la columna vertebral." },
+                        { name: "Aperturas Pecho (Máquina)", reps: "3x12", tech: "Estiramiento", notes: "Masa pectoral garantizada." },
+                        { name: "Sentadilla Libre (Calistenia)", reps: "3x15", tech: "Funcional", notes: "Fuerza real para el día a día." },
+                        { name: "Máquina Osciladora (Total)", reps: "5 min", tech: "Drenaje", notes: "Recuperación activa final." }
+                    ]
+                }
+            ]
+        };
+
+        const dayNames = ["LUNES", "MARTES", "MIÉRCOLES", "JUEVES", "VIERNES", "SÁBADO"];
+
+        function setTab(t) {
+            state.tab = t;
+            document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`tab-${t}`).classList.add('active');
+
+            const trainingView = document.getElementById('training-view');
+            const dietView = document.getElementById('diet-view');
+
+            if (t === 'diet') {
+                trainingView.classList.add('hidden');
+                dietView.classList.remove('hidden');
             } else {
-                macrosUI.classList.add('hidden');
-                nutAlert.className = "alert-box alert-train";
-                nutAlert.style.borderColor = "var(--brand-gold)";
-                nutAlert.style.color = "var(--brand-gold)";
-                nutAlert.innerHTML = `<i class="fas fa-user-shield"></i> ENFOQUE: Proteína Alta (Huevo/Pollo) + Hidratación constante vs Sarcopenia.`;
+                trainingView.classList.remove('hidden');
+                dietView.classList.add('hidden');
+                renderDaySelector();
+                if (state.day > 4) state.day = 0;
+            }
+            render();
+        }
+
+        function renderDaySelector() {
+            const container = document.getElementById('day-selector');
+            const days = 5; // Mon-Fri for both
+            let html = '';
+            for (let i = 0; i < days; i++) {
+                html += `<button onclick="setDay(${i})" class="day-btn ${state.day === i ? 'active' : ''}">${dayNames[i].substring(0, 3)}</button>`;
+            }
+            container.innerHTML = html;
+        }
+
+        function setDay(d) {
+            state.day = d;
+            renderDaySelector();
+            render();
+        }
+
+        function render() {
+            const list = document.getElementById('exercise-list');
+            const displayFocus = document.getElementById('display-focus');
+            const displayDay = document.getElementById('display-day');
+            const seniorNutView = document.getElementById('senior-nutrition-view');
+            const trainingView = document.getElementById('training-view');
+            const dietView = document.getElementById('diet-view');
+
+            if (state.tab === 'diet') {
+                trainingView.classList.add('hidden');
+                seniorNutView.classList.add('hidden');
+                dietView.classList.remove('hidden');
+                return;
+            } else if (state.tab === 'senior') {
+                seniorNutView.classList.remove('hidden');
+                calculateSeniorMacros();
+            } else {
+                seniorNutView.classList.add('hidden');
             }
 
-            // 3. Update Routine
-            const routineList = document.getElementById('routine-list');
-            routineList.innerHTML = '';
+            trainingView.classList.remove('hidden');
+            dietView.classList.add('hidden');
 
-            if (isTraining) {
-                document.getElementById('training-card').classList.remove('hidden');
-                user.routine.forEach(ex => {
-                    const div = document.createElement('div');
-                    div.className = 'exercise-item';
-                    div.innerHTML = `
-                        <div class="ex-info">
-                            <h4>${ex.name}</h4>
-                            <span>${ex.sets}</span>
+            const data = workoutData[state.tab][state.day] || { focus: "DESCANSO", exercises: [] };
+
+            displayDay.innerText = dayNames[state.day];
+            displayFocus.innerText = data.focus;
+
+            if (data.exercises.length === 0) {
+                list.innerHTML = `<div class="glass-card p-10 text-center text-gray-500 uppercase font-black text-xl italic tracking-widest">Día de Recuperación</div>`;
+                return;
+            }
+
+            list.innerHTML = data.exercises.map((ex, idx) => {
+                const exerciseKey = `${state.tab}_${state.day}_${idx}`;
+                const saved = state.history[exerciseKey] || { weight: '', checked: false };
+                const lastWeight = saved.weight || '--';
+                const nextWeek = saved.weight && saved.checked ? Math.round(parseFloat(saved.weight) * 1.05) : '--';
+
+                return `
+                <div class="glass-card p-6 animate-fade border-l-4 ${state.tab === 'pro' ? 'border-red-500' : 'border-gold-500'}">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex-1 pr-4">
+                             <div class="flex items-center gap-3 mb-2">
+                                <div onclick="toggleCheck('${exerciseKey}')" class="check-btn w-8 h-8 ${saved.checked ? 'checked' : ''}">
+                                    <i class="fas fa-check text-white text-sm ${saved.checked ? '' : 'hidden'}"></i>
+                                </div>
+                                <h4 class="text-2xl font-black text-white uppercase leading-tight">${ex.name}</h4>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="bg-white/10 text-white text-xs font-black px-3 py-1 rounded uppercase">${ex.reps}</span>
+                                <span class="text-[10px] uppercase font-bold text-gray-500 tracking-widest">${ex.tech}</span>
+                            </div>
                         </div>
-                        <i class="fas fa-check-circle" style="color: #333;"></i>
-                    `;
-                    routineList.appendChild(div);
-                });
-            } else {
-                document.getElementById('training-card').classList.add('hidden');
-            }
+                        <a href="https://www.youtube.com/results?search_query=ejercicio+${ex.name.replace(/ /g, '+')}" target="_blank" class="w-12 h-12 bg-white/5 text-white rounded-full flex items-center justify-center border border-white/10 shadow-lg">
+                            <i class="fas fa-play text-xs"></i>
+                        </a>
+                    </div>
 
-            // 4. Beast Rules
-            const beastRules = document.getElementById('beast-rules');
-            if (user.showBeastRules) {
-                beastRules.classList.remove('hidden');
-            } else {
-                beastRules.classList.add('hidden');
-            }
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="bg-black/40 p-3 rounded-2xl text-center">
+                            <span class="text-[10px] text-gray-500 block uppercase font-black mb-1">Anterior</span>
+                            <span class="text-2xl font-black text-white">${lastWeight} <small class="text-xs text-gray-600">LB</small></span>
+                        </div>
+                        <div class="bg-white/5 p-3 rounded-2xl text-center border-2 border-white/10">
+                            <span class="text-[10px] text-gold-500 block uppercase font-black mb-1">Hoy (LB)</span>
+                            <input type="number" value="${saved.weight}" oninput="saveWeight('${exerciseKey}', this.value)" 
+                                placeholder="0" class="w-full bg-transparent text-center font-black text-white outline-none text-2xl">
+                        </div>
+                        <div class="bg-black/40 p-3 rounded-2xl text-center">
+                            <span class="text-[10px] text-cyan-500 block uppercase font-black mb-1">Sig. Sem</span>
+                            <span class="text-2xl font-black text-cyan-500">${nextWeek} <small class="text-xs text-gray-600">LB</small></span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            }).join('');
         }
 
-        // --- Interaction Logic ---
-        function toggleScoreCheck(el, pts) {
-            const check = el.querySelector('.score-check');
-            if (check.classList.contains('checked')) {
-                check.classList.remove('checked');
-                currentPoints -= pts;
-            } else {
-                check.classList.add('checked');
-                currentPoints += pts;
-            }
-            updateScoreDisplay();
+        function toggleCheck(key) {
+            if (!state.history[key]) state.history[key] = { weight: '', checked: false };
+            state.history[key].checked = !state.history[key].checked;
+            saveHistory();
+            render();
         }
 
-        function updateScoreDisplay() {
-            const display = document.getElementById('total-score');
-            const feedback = document.getElementById('score-feedback');
-            display.innerText = `${currentPoints}%`;
-
-            if (currentPoints === 100) {
-                feedback.innerText = "¡Nivel Dios Seleccionado!";
-                feedback.style.color = "var(--brand-cyan)";
-            } else if (currentPoints >= 60) {
-                feedback.innerText = "Buen camino, no aflojes.";
-                feedback.style.color = "var(--brand-gold)";
-            } else {
-                feedback.innerText = "Disciplina es Libertad";
-                feedback.style.color = "var(--text-muted)";
-            }
+        function saveWeight(key, val) {
+            if (!state.history[key]) state.history[key] = { weight: '', checked: false };
+            state.history[key].weight = val;
+            saveHistory();
         }
 
-        // Initialize
-        window.onload = updateUI;
+        function saveHistory() {
+            localStorage.setItem('valknut_history', JSON.stringify(state.history));
+        }
 
+        function syncToSheets() {
+            alert('¡Enviando datos! (Para conectar a tu Google Sheets personal, contacta con soporte para vincular tu Webhook de n8n o Google Script).');
+            // Aquí iría el fetch a una URL de Google Apps Script o n8n
+            console.log("Datos para sincronizar:", state.history);
+        }
+
+        function calculateSeniorMacros() {
+            const w = document.getElementById('senior-weight').value;
+            if (!w) return;
+            const protein = Math.round(w * 1.0); // 1g por lb para seniors ganando musculo
+            const cals = Math.round(w * 14);     // Mantenimiento + ligero superavit
+
+            document.getElementById('senior-macros-res').innerHTML = `
+                <div class="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/10">
+                    <span class="text-[10px] font-black text-gray-400 uppercase">Kcal Recomendadas</span>
+                    <span class="text-xl font-black text-white">${cals} Kcal</span>
+                </div>
+                <div class="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/10">
+                    <span class="text-[10px] font-black text-red-500 uppercase">Proteína Objetivo</span>
+                    <span class="text-xl font-black text-red-500">${protein}g</span>
+                </div>
+            `;
+        }
+
+        function calculateCals() {
+            const weight = document.getElementById('weight-input').value;
+            if (!weight) return;
+
+            // Formula Jeremy Ethier: BW(lb) * 8.075 for specific Jesus base
+            const cals = Math.round(weight * 8.075);
+
+            // Macros dinamicos
+            const protein = Math.round(weight * 0.86); // ~250g para 291lb
+            const fat = Math.round(weight * 0.24);      // ~70g para 291lb
+            const carbs = Math.round((cals - (protein * 4) - (fat * 9)) / 4);
+
+            document.getElementById('cal-display').innerText = cals;
+            document.getElementById('protein-display').innerText = protein + 'g';
+            document.getElementById('carbs-display').innerText = carbs + 'g';
+            document.getElementById('fat-display').innerText = fat + 'g';
+        }
+
+        window.onload = () => {
+            renderDaySelector();
+            render();
+            calculateCals();
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('./sw.js');
+            }
+        };
     </script>
 </body>
 
