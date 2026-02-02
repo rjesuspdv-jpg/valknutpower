@@ -1,40 +1,50 @@
-const CACHE_NAME = 'valknut-ultimate-v1';
+const CACHE_NAME = 'valknut-ultimate-v2';
 const ASSETS = [
     './',
     './index.html',
     './manifest.json',
     'https://cdn.tailwindcss.com',
-    'https://cdn.jsdelivr.net/npm/chart.js',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
 ];
 
 self.addEventListener('install', (event) => {
+    self.skipWaiting();
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
-            // Force caching even if they fail (opaque responses)
             return Promise.allSettled(ASSETS.map(url => cache.add(url)));
         })
     );
-    self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys().then((keys) => {
-            return Promise.all(keys.map(key => key !== CACHE_NAME ? caches.delete(key) : null));
+            return Promise.all(
+                keys.map((key) => {
+                    if (key !== CACHE_NAME) {
+                        return caches.delete(key);
+                    }
+                })
+            );
         })
     );
+    self.clients.claim();
 });
 
+// Network First strategy to avoid getting stuck with old versions
 self.addEventListener('fetch', (event) => {
+    if (event.request.mode === 'navigate') {
+        event.respondWith(
+            fetch(event.request).catch(() => {
+                return caches.match('./index.html');
+            })
+        );
+        return;
+    }
+
     event.respondWith(
         caches.match(event.request).then((response) => {
-            return response || fetch(event.request).then(fetchRes => {
-                return caches.open(CACHE_NAME).then(cache => {
-                    cache.put(event.request.url, fetchRes.clone());
-                    return fetchRes;
-                });
-            });
-        }).catch(() => caches.match('./index.html'))
+            return response || fetch(event.request);
+        })
     );
 });
