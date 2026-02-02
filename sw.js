@@ -1,4 +1,4 @@
-const CACHE_NAME = 'valknut-ultimate-v2';
+const CACHE_NAME = 'valknut-ultimate-v3';
 const ASSETS = [
     './',
     './index.html',
