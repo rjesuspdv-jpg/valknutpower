@@ -23,9 +23,10 @@
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap');
 
         :root {
-            --brand-amber: #f59e0b;
-            --brand-slate: #020617;
-            --brand-dark: #0f172a;
+            --brand-red: #D94343;
+            --brand-red-glow: rgba(217, 67, 67, 0.4);
+            --brand-slate: #0a0a0c;
+            --brand-dark: #111114;
         }
 
         body {
@@ -67,8 +68,8 @@
         }
 
         .profile-card:hover {
-            border-color: var(--brand-amber);
-            background: rgba(245, 158, 11, 0.05);
+            border-color: var(--brand-red);
+            background: rgba(217, 67, 67, 0.05);
             transform: translateY(-5px);
         }
 
@@ -90,9 +91,9 @@
         }
 
         .nav-tab.active {
-            color: var(--brand-amber);
-            background: rgba(245, 158, 11, 0.1);
-            border: 1px solid rgba(245, 158, 11, 0.2);
+            color: var(--brand-red);
+            background: rgba(217, 67, 67, 0.1);
+            border: 1px solid rgba(217, 67, 67, 0.2);
         }
 
         .day-btn {
@@ -110,9 +111,9 @@
         }
 
         .day-btn.active {
-            border-color: var(--brand-amber);
-            background: var(--brand-amber);
-            color: var(--brand-slate);
+            border-color: var(--brand-red);
+            background: var(--brand-red);
+            color: white;
             transform: scale(1.1);
         }
 
@@ -171,23 +172,22 @@
     <div id="welcome-screen" class="welcome-screen">
         <div class="max-w-md w-full space-y-12">
             <div class="space-y-4">
-                <img src="logo.png?v=3" alt="Logo"
-                    class="w-32 h-32 mx-auto drop-shadow-[0_0_30px_rgba(245,158,11,0.3)]">
-                <h1 class="text-5xl font-black italic tracking-tighter">VALKNUT<span class="text-amber-500">POWER</span>
+                <img src="logo.png?v=3" alt="Logo" class="w-32 h-32 mx-auto drop-shadow-[0_0_30px_rgba(217,67,67,0.3)]">
+                <h1 class="text-5xl font-black italic tracking-tighter">VALKNUT<span class="text-red-500">POWER</span>
                 </h1>
                 <p class="text-slate-400 font-bold uppercase tracking-[0.2em] text-sm">Escoge tu camino</p>
             </div>
 
             <div class="grid gap-6">
                 <div onclick="selectProfile('pro')" class="profile-card group">
-                    <i class="fas fa-bolt text-4xl text-amber-500 mb-4 group-hover:scale-110 transition-transform"></i>
+                    <i class="fas fa-bolt text-4xl text-red-500 mb-4 group-hover:scale-110 transition-transform"></i>
                     <h3 class="text-2xl font-black uppercase italic mb-2">VALKNUT PRO</h3>
                     <p class="text-slate-500 text-xs font-bold leading-relaxed">Entrenamiento de alto rendimiento y
                         nutrición avanzada.</p>
                 </div>
 
                 <div onclick="selectProfile('senior')" class="profile-card group">
-                    <i class="fas fa-heart text-4xl text-amber-500 mb-4 group-hover:scale-110 transition-transform"></i>
+                    <i class="fas fa-heart text-4xl text-red-500 mb-4 group-hover:scale-110 transition-transform"></i>
                     <h3 class="text-2xl font-black uppercase italic mb-2">SENIOR +60</h3>
                     <p class="text-slate-500 text-xs font-bold leading-relaxed">Fuerza, longevidad y salud para una vida
                         plena.</p>
@@ -203,7 +203,7 @@
                 <div class="flex items-center gap-4">
                     <img src="logo.png?v=3" alt="Valknut Logo" class="w-12 h-12 rounded-xl">
                     <h1 class="text-2xl font-black italic tracking-tighter">VALKNUT<span
-                            class="text-amber-500">POWER</span></h1>
+                            class="text-red-500">POWER</span></h1>
                 </div>
 
                 <nav class="flex w-full gap-2 bg-slate-900 p-1.5 rounded-2xl border border-white/5">
@@ -229,7 +229,7 @@
                 </div>
 
                 <h2 class="text-2xl font-black italic uppercase text-center border-b border-white/5 pb-4">
-                    <span id="display-day">LUNES</span>: <span class="text-amber-500" id="display-focus">TREN
+                    <span id="display-day">LUNES</span>: <span class="text-red-500" id="display-focus">TREN
                         SUPERIOR</span>
                 </h2>
 
@@ -240,8 +240,8 @@
 
             <!-- Senior Specific Nutrition Advice -->
             <div id="senior-nutrition-view" class="hidden space-y-6 animate-fade mb-10">
-                <div class="glass-card p-6 border-l-4 border-amber-500">
-                    <h3 class="text-2xl font-black text-amber-500 uppercase italic mb-4">Nutrición Senior Elite</h3>
+                <div class="glass-card p-6 border-l-4 border-red-500">
+                    <h3 class="text-2xl font-black text-red-500 uppercase italic mb-4">Nutrición Senior Elite</h3>
                     <p class="text-[11px] text-slate-400 mb-6 uppercase font-black tracking-widest">Combatiendo la
                         Sarcopenia</p>
 
@@ -264,29 +264,29 @@
                     </div>
                 </div>
 
-                <div class="glass-card p-6 border border-amber-500/20 bg-amber-500/5">
-                    <h4 class="text-xs font-black text-amber-500 uppercase mb-3 text-center">Consejos de Longevidad</h4>
+                <div class="glass-card p-6 border border-red-500/20 bg-red-500/5">
+                    <h4 class="text-xs font-black text-red-500 uppercase mb-3 text-center">Consejos de Longevidad</h4>
                     <ul class="text-[12px] space-y-3 text-slate-400">
-                        <li class="flex gap-3"><span class="text-amber-500">●</span> <span><b
-                                    class="text-white">Proteína Alta:</b> Mínimo 1.2g - 1.5g por kilo.</span></li>
-                        <li class="flex gap-3"><span class="text-amber-500">●</span> <span><b
+                        <li class="flex gap-3"><span class="text-red-500">●</span> <span><b class="text-white">Proteína
+                                    Alta:</b> Mínimo 1.2g - 1.5g por kilo.</span></li>
+                        <li class="flex gap-3"><span class="text-red-500">●</span> <span><b
                                     class="text-white">Leucina:</b> Activa la síntesis muscular (huevos/lácteos).</span>
                         </li>
-                        <li class="flex gap-3"><span class="text-amber-500">●</span> <span><b
+                        <li class="flex gap-3"><span class="text-red-500">●</span> <span><b
                                     class="text-white">Hidratación:</b> Vital para articulaciones y discos.</span></li>
                     </ul>
                 </div>
             </div>
 
             <div id="diet-view" class="hidden space-y-6 animate-fade">
-                <div class="glass-card p-8 border-l-4 border-amber-500">
-                    <h3 class="text-2xl font-black text-amber-500 uppercase italic mb-8">Plan Nutricional Élite</h3>
+                <div class="glass-card p-8 border-l-4 border-red-500">
+                    <h3 class="text-2xl font-black text-red-500 uppercase italic mb-8">Plan Nutricional Élite</h3>
 
                     <div class="grid gap-4 mb-8">
                         <!-- Macro Cards -->
                         <div class="bg-slate-900/50 p-6 rounded-[2rem] border border-white/5 flex items-center gap-6">
                             <div
-                                class="w-16 h-16 bg-amber-500/10 rounded-2xl flex items-center justify-center text-3xl text-amber-500">
+                                class="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center text-3xl text-red-500">
                                 <i class="fas fa-drumstick-bite"></i>
                             </div>
                             <div>
@@ -298,7 +298,7 @@
 
                         <div class="bg-slate-900/50 p-6 rounded-[2rem] border border-white/5 flex items-center gap-6">
                             <div
-                                class="w-16 h-16 bg-amber-500/20 rounded-2xl flex items-center justify-center text-3xl text-amber-500">
+                                class="w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-3xl text-red-500">
                                 <i class="fas fa-bowl-rice"></i>
                             </div>
                             <div>
@@ -310,7 +310,7 @@
 
                         <div class="bg-slate-900/50 p-6 rounded-[2rem] border border-white/5 flex items-center gap-6">
                             <div
-                                class="w-16 h-16 bg-amber-600/10 rounded-2xl flex items-center justify-center text-3xl text-amber-600">
+                                class="w-16 h-16 bg-red-600/10 rounded-2xl flex items-center justify-center text-3xl text-red-600">
                                 <i class="fas fa-droplet"></i>
                             </div>
                             <div>
@@ -323,12 +323,12 @@
 
                     <div class="space-y-6">
                         <div
-                            class="bg-slate-950 p-8 rounded-[2.5rem] border border-amber-500/20 text-center relative overflow-hidden group">
+                            class="bg-slate-950 p-8 rounded-[2.5rem] border border-red-500/20 text-center relative overflow-hidden group">
                             <div
-                                class="absolute inset-0 bg-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity">
+                                class="absolute inset-0 bg-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity">
                             </div>
                             <span
-                                class="text-[10px] font-black text-amber-500 uppercase tracking-[0.3em] block mb-2">Energía
+                                class="text-[10px] font-black text-red-500 uppercase tracking-[0.3em] block mb-2">Energía
                                 Diaria</span>
                             <span id="cal-display" class="text-6xl font-black text-white relative z-10">2350</span>
                             <span class="text-xs font-black text-slate-500 uppercase tracking-widest block mt-2">Kcal
@@ -340,15 +340,15 @@
                                 class="text-[10px] font-black text-slate-500 uppercase block mb-4 text-center tracking-widest">Peso
                                 Actual para Ajuste (lb)</label>
                             <input type="number" id="weight-input" value="291" oninput="calculateCals()"
-                                class="w-full bg-slate-950 border border-white/10 rounded-2xl px-6 py-4 text-center text-2xl font-black outline-none focus:border-amber-500 transition">
+                                class="w-full bg-slate-950 border border-white/10 rounded-2xl px-6 py-4 text-center text-2xl font-black outline-none focus:border-red-500 transition">
                         </div>
                     </div>
 
                     <div class="mt-8 space-y-4">
                         <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-slate-900/50 p-6 rounded-3xl border-t-4 border-amber-500">
+                            <div class="bg-slate-900/50 p-6 rounded-3xl border-t-4 border-red-500">
                                 <span
-                                    class="text-[10px] font-black text-amber-500 uppercase block mb-2 tracking-widest">PRE-ENTRENO</span>
+                                    class="text-[10px] font-black text-red-500 uppercase block mb-2 tracking-widest">PRE-ENTRENO</span>
                                 <p class="text-xs text-slate-300 leading-relaxed font-medium">Amino Energy + Fruta</p>
                             </div>
                             <div class="bg-slate-900/50 p-6 rounded-3xl border-t-4 border-white/10">
@@ -360,14 +360,14 @@
 
                         <div class="bg-slate-900/50 p-6 rounded-3xl border border-white/5">
                             <span
-                                class="text-[10px] font-black text-amber-500 uppercase block mb-4 tracking-[0.3em]">SUPLEMENTACIÓN</span>
+                                class="text-[10px] font-black text-red-500 uppercase block mb-4 tracking-[0.3em]">SUPLEMENTACIÓN</span>
                             <div class="grid grid-cols-2 gap-4 text-[11px]">
                                 <div class="flex items-center gap-3">
-                                    <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                                    <span class="w-2 h-2 rounded-full bg-red-500"></span>
                                     <span class="text-slate-300">Creatina 5g</span>
                                 </div>
                                 <div class="flex items-center gap-3">
-                                    <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                                    <span class="w-2 h-2 rounded-full bg-red-500"></span>
                                     <span class="text-slate-300">Multivitamínico</span>
                                 </div>
                             </div>
@@ -379,7 +379,7 @@
                     <h4 class="text-[10px] font-black text-slate-500 uppercase mb-4 tracking-[0.3em] text-center">Cloud
                         Sync</h4>
                     <button id="sync-btn" onclick="syncToSheets()"
-                        class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-5 rounded-2xl transition-all flex items-center justify-center gap-3 active:scale-95 shadow-[0_10px_30px_rgba(245,158,11,0.2)]">
+                        class="w-full bg-red-600 hover:bg-red-500 text-white font-black py-5 rounded-2xl transition-all flex items-center justify-center gap-3 active:scale-95 shadow-[0_10px_30px_rgba(217,67,67,0.2)]">
                         <span id="sync-text" class="flex items-center gap-3 italic">
                             <i class="fas fa-cloud-arrow-up"></i>
                             SINCRONIZAR PROGRESO
@@ -563,7 +563,7 @@
                     const nextWeek = saved.weight && saved.checked ? Math.round(parseFloat(saved.weight) * 1.05) : '--';
 
                     return `
-                <div class="glass-card p-6 animate-fade border-l-4 border-amber-500">
+                <div class="glass-card p-6 animate-fade border-l-4 border-red-500">
                     <div class="flex justify-between items-start mb-6">
                         <div class="flex-1 pr-4">
                              <div class="flex items-center gap-3 mb-2">
@@ -654,9 +654,9 @@
                     <span class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Kcal Recomendadas</span>
                     <span class="text-xl font-black text-white italic">${cals} Kcal</span>
                 </div>
-                <div class="flex justify-between items-center bg-amber-500/10 p-4 rounded-2xl border border-amber-500/20">
-                    <span class="text-[10px] font-black text-amber-500 uppercase tracking-widest">Proteína Objetivo</span>
-                    <span class="text-xl font-black text-amber-500 italic">${protein}g</span>
+                <div class="flex justify-between items-center bg-red-500/10 p-4 rounded-2xl border border-red-500/20">
+                    <span class="text-[10px] font-black text-red-500 uppercase tracking-widest">Proteína Objetivo</span>
+                    <span class="text-xl font-black text-red-500 italic">${protein}g</span>
                 </div>
             `;
             }
