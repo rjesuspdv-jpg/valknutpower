@@ -285,40 +285,53 @@
         const workoutData = {
             pro: [
                 {
-                    focus: "SUPERIOR (EMPUJE)", exercises: [
-                        { name: "Press de Banca Plano", reps: "4x6-8", tech: "Control 3s", notes: "Fuerza básica pecho." },
-                        { name: "Press Inclinado Mancuernas", reps: "3x10-12", tech: "RIR 2", notes: "Pecho superior." },
-                        { name: "Press Militar Barra", reps: "3x8-10", tech: "Core Bracing", notes: "Hombros estéticos." },
-                        { name: "Press Francés", reps: "3x12", tech: "Extensión", notes: "Tríceps potentes." }
-                    ], diet: "Omelette de claras con pan integral y fruta. Pollo con arroz y brócoli."
+                    focus: "PECHO, HOMBRO Y TRÍCEPS", exercises: [
+                        { name: "Banca Inclinada Smith", reps: "2x15, 2x8 (MAX peso)", tech: "Técnica 10/25", notes: "Pedro Colina: 30 grados. Enfoque pecho superior." },
+                        { name: "Banca Plana (Mancuerna/Barra)", reps: "1x12, 1x10, 1x8", tech: "Carga Progresiva", notes: "Jeremy Ethier: Controla el descenso 3 seg." },
+                        { name: "Pecho Inclinado Hammer", reps: "2x12", tech: "Técnica 3/7", notes: "3 reps, 5s descanso, hasta llegar a 7." },
+                        { name: "Aperturas en Cable/Máquina", reps: "2x12", tech: "Drop Set", notes: "Sujeta desde arriba para activar pec superior." },
+                        { name: "Copal/Francés + Dips", reps: "4x12", tech: "Biserie", notes: "Dips en máquina para no comprometer hombro." },
+                        { name: "Cardio LISS", reps: "30 min", tech: "Quema Grasa", notes: "Caminata rápida en inclinación." }
+                    ], diet: "Antes: Amino + Fruta. Después: ISO100 + Carbo complejo (Arroz/Papa)."
                 },
                 {
-                    focus: "INFERIOR (CUÁDRICEPS)", exercises: [
-                        { name: "Sentadilla Libre Barra", reps: "4x6-8", tech: "Profundidad", notes: "Mejor ejercicio constructor pierna." },
-                        { name: "Prensa de Piernas", reps: "3x12-15", tech: "Carga Progresiva", notes: "No bloquees rodillas." },
-                        { name: "Extensión Cuádriceps", reps: "3x15", tech: "Drop Set", notes: "Aislamiento total." }
-                    ], diet: "Proteína con fruta. Carne roja (90/10) con boniato y judías verdes."
+                    focus: "ESPALDA Y BÍCEPS", exercises: [
+                        { name: "Jalón Polea Agarre Cerrado", reps: "4x8", tech: "Rest Pause", notes: "Mini-descansos en la última serie para hipertrofia." },
+                        { name: "Remo en Máquina Individual", reps: "2x10", tech: "Biserie", notes: "Súper-set solo en la última serie. Aprieta escápulas." },
+                        { name: "Pull Over en Polea", reps: "3x15", tech: "Tensión Constante", notes: "Brazo casi recto, foco en el dorsal ancho." },
+                        { name: "Súper Serie Espalda", reps: "2 series", tech: "Circuito 25 reps", notes: "6 remos, 5 encogimientos, 5 peso muerto, 5 encogs, 4 PM." },
+                        { name: "Curl Barra Z + Martillo", reps: "3x12", tech: "Drop Set", notes: "Última serie al fallo total." },
+                        { name: "Cardio LISS", reps: "30 min", tech: "Quema Grasa", notes: "Mantén pulsaciones zona 2." }
+                    ], diet: "Antes: Fruta. Después: Pollo con pasta integral y ensalada."
                 },
                 {
-                    focus: "SUPERIOR (JALÓN)", exercises: [
-                        { name: "Remo con Barra", reps: "4x8-10", tech: "Grosor", notes: "Espalda fuerte." },
-                        { name: "Jalón al Pecho", reps: "3x10-12", tech: "Amplitud", notes: "Abre la espalda." },
-                        { name: "Curl Bíceps Barra Z", reps: "3x12", tech: "No inercia", notes: "Bíceps rocosos." }
-                    ], diet: "Yogur griego con piña. Salmón con quinoa y espárragos."
+                    focus: "PIERNA COMPLETA", exercises: [
+                        { name: "Extensión Rodilla (Máquina)", reps: "3 sets", tech: "Triple Drop Set", notes: "Sostiene 5s en la última repetición de cada drop." },
+                        { name: "Sentadilla Smith / Libre", reps: "4x12, 10, 8, 8", tech: "Pirámide", notes: "Jeremy Ethier: Pies a ancho de hombros." },
+                        { name: "Prensa Pesada", reps: "4 sets", tech: "Drop Set + Rest Pause", notes: "1 set pesada con 10s en rest pause al final." },
+                        { name: "Serie Gigante (Hack/Zancada/Ext)", reps: "3 series", tech: "GIGANTE", notes: "Hack 6 + Zancadas 25 + Ext 12 + Zancadas 25 sin descanso." },
+                        { name: "Femoral Sentado/Acostado", reps: "7x10", tech: "Técnica 10/25", notes: "Descansos cortos de 45 seg." },
+                        { name: "Cardio LISS", reps: "30 min", tech: "Quema Grasa", notes: "Post-pierna suave para drenar láctico." }
+                    ], diet: "Antes: Granola/Avena (si aplica) o Fruta. Después: Carne roja y boniato."
                 },
                 {
-                    focus: "PIERNA (POSTERIOR/GLÚTEO)", exercises: [
-                        { name: "Hip Thrust Pesado", reps: "4x10", tech: "Contracción 2s", notes: "Glúteos de acero." },
-                        { name: "Peso Muerto Rumano", reps: "4x10", tech: "Stretch", notes: "Sentir isquios estirarse." },
-                        { name: "Zancadas Caminando", reps: "3x20 pasos", tech: "Paso largo", notes: "Glúteo medio." }
-                    ], diet: "Batido de proteína con leche y banana. Pavo molido con pasta integral y ensalada."
+                    focus: "HOMBROS Y DETALLES PECHO", exercises: [
+                        { name: "Elevación Lateral Mancuerna", reps: "3x15", tech: "Doble Drop Set", notes: "En las 3 mejores series, 90s de descanso." },
+                        { name: "Press Militar (Máquina/Manc)", reps: "3x8", tech: "Pausas 2s", notes: "No bloquees codos arriba." },
+                        { name: "Laterales en Polea Acostado", reps: "3x20", tech: "Triple Drop Set", notes: "Máxima congestión del deltoide lateral." },
+                        { name: "Cruce Polea Alta", reps: "4x15", tech: "Drop Set", notes: "Foco hombro posterior y pecho superior." },
+                        { name: "Cardio LISS", reps: "30 min", tech: "Quema Grasa", notes: "Controla la respiración." }
+                    ], diet: "Antes: Café/Amino. Después: Pescado con quinoa."
                 },
                 {
-                    focus: "FULL BODY / MOBILITY", exercises: [
-                        { name: "Press Smith Inclinado", reps: "3x10", tech: "Tensión", notes: "Finalizador pecho." },
-                        { name: "Elevaciones Laterales", reps: "4x15", tech: "RIR 1", notes: "Hombros anchos." },
-                        { name: "Plancha Abdominal", reps: "4x1 min", tech: "Estabilidad", notes: "Core rocoso." }
-                    ], diet: "Pan integral con crema de cacahuete (poca) y claras. Pescado blanco con papa al horno y espinacas."
+                    focus: "ESPALDA GROSOR Y BRAZOS", exercises: [
+                        { name: "Peso Muerto + Hiperextensión", reps: "2x20", tech: "Biserie", notes: "Activación lumbar antes de empezar pesado." },
+                        { name: "Hammer Espalda Pesado", reps: "4x10", tech: "Técnica 10/25", notes: "Pedro Colina: 2 min descanso entre series mejores." },
+                        { name: "Remo Polea Baja", reps: "3x8", tech: "Rest Pause", notes: "Tira hacia el ombligo." },
+                        { name: "Maquina Espalda (Pecho apoyado)", reps: "2x10", tech: "Doble Drop Set", notes: "Grosor puro." },
+                        { name: "Bíceps/Tríceps Mix", reps: "4x12", tech: "Biserie al fallo", notes: "Finalizador de brazos." },
+                        { name: "Cardio LISS", reps: "30 min", tech: "Quema Grasa", notes: "30 min finales sin excusas." }
+                    ], diet: "Antes: Amino + TEA. Después: Huevos con aguacate y pan integral."
                 }
             ],
             senior: [
