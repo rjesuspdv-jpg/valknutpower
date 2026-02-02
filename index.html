@@ -120,7 +120,7 @@
 
         <!-- Training View -->
         <div id="training-view" class="space-y-6">
-            <!-- Day Selector -->
+            <!-- Day Selector (L-V) -->
             <div class="flex justify-between items-center bg-white/5 p-2 rounded-full border border-white/10"
                 id="day-selector">
                 <button onclick="setDay(0)" class="day-btn active">LUN</button>
@@ -128,7 +128,6 @@
                 <button onclick="setDay(2)" class="day-btn">MIE</button>
                 <button onclick="setDay(3)" class="day-btn">JUE</button>
                 <button onclick="setDay(4)" class="day-btn">VIE</button>
-                <button onclick="setDay(5)" class="day-btn" id="day6-btn">SAB</button>
             </div>
 
             <h2 class="text-2xl font-black italic uppercase text-center border-b border-white/5 pb-4">
@@ -209,79 +208,79 @@
         const workoutData = {
             pro: [
                 {
-                    focus: "SUPERIOR (FUERZA)", exercises: [
-                        { name: "Press de Banca Plano", reps: "4x6-8", tech: "Carga Progresiva", notes: "Controla el descenso 3 seg." },
-                        { name: "Remo con Barra", reps: "4x8-10", tech: "Retracción Escapular", notes: "Espalda paralela al suelo." },
-                        { name: "Press Inclinado Mancuernas", reps: "3x10-12", tech: "Tempo 3-1-1", notes: "Foco pecho superior." },
-                        { name: "Jalón al Pecho (Ancho)", reps: "3x12", tech: "Conexión Dorsal", notes: "Lleva codos a la cadera." },
-                        { name: "Press Militar Barra", reps: "3x8-10", tech: "RIR 2", notes: "Hombros potentes." }
-                    ]
+                    focus: "SUPERIOR (EMPUJE)", exercises: [
+                        { name: "Press de Banca Plano", reps: "4x6-8", tech: "Control 3s", notes: "Fuerza básica pecho." },
+                        { name: "Press Inclinado Mancuernas", reps: "3x10-12", tech: "RIR 2", notes: "Pecho superior." },
+                        { name: "Press Militar Barra", reps: "3x8-10", tech: "Core Bracing", notes: "Hombros estéticos." },
+                        { name: "Press Francés", reps: "3x12", tech: "Extensión", notes: "Tríceps potentes." }
+                    ], diet: "Omelette de claras con pan integral y fruta. Pollo con arroz y brócoli."
                 },
                 {
                     focus: "INFERIOR (CUÁDRICEPS)", exercises: [
-                        { name: "Sentadilla Libre Barra", reps: "4x6-8", tech: "Explosividad", notes: "Baja controlado, sube rápido." },
-                        { name: "Prensa de Piernas (45°)", reps: "3x12-15", tech: "Pausa en Estiramiento", notes: "No bloquees rodillas arriba." },
-                        { name: "Zancadas Caminando", reps: "3x20 pasos", tech: "Control Tensión", notes: "Zancada larga." },
-                        { name: "Extensión de Cuádriceps", reps: "4x15", tech: "5 Parciales al final", notes: "Quema máxima." }
-                    ]
+                        { name: "Sentadilla Libre Barra", reps: "4x6-8", tech: "Profundidad", notes: "Mejor ejercicio constructor pierna." },
+                        { name: "Prensa de Piernas", reps: "3x12-15", tech: "Carga Progresiva", notes: "No bloquees rodillas." },
+                        { name: "Extensión Cuádriceps", reps: "3x15", tech: "Drop Set", notes: "Aislamiento total." }
+                    ], diet: "Proteína con fruta. Carne roja (90/10) con boniato y judías verdes."
                 },
                 {
-                    focus: "PUSH (EMPUJE)", exercises: [
-                        { name: "Press Smith Inclinado", reps: "3x8-10", tech: "Protocolo 10/25", notes: "Máxima tensión pectoral." },
-                        { name: "Aperturas Mancuernas", reps: "3x15", tech: "Estiramiento Profundo", notes: "No flexiones codos de más." },
-                        { name: "Press Hombro Sentado", reps: "3x10-12", tech: "RIR 1", notes: "Mancuernas pesadas." },
-                        { name: "Press Francés", reps: "3x12", tech: "Máxima Extensión", notes: "Barra a la frente." }
-                    ]
+                    focus: "SUPERIOR (JALÓN)", exercises: [
+                        { name: "Remo con Barra", reps: "4x8-10", tech: "Grosor", notes: "Espalda fuerte." },
+                        { name: "Jalón al Pecho", reps: "3x10-12", tech: "Amplitud", notes: "Abre la espalda." },
+                        { name: "Curl Bíceps Barra Z", reps: "3x12", tech: "No inercia", notes: "Bíceps rocosos." }
+                    ], diet: "Yogur griego con piña. Salmón con quinoa y espárragos."
                 },
                 {
-                    focus: "PIERNA TOTAL", exercises: [
-                        { name: "Hip Thrust Pesado", reps: "4x10", tech: "Método Colina", notes: "Mentón al pecho. Pausa 2s arriba." },
-                        { name: "Peso Muerto Rumano", reps: "4x10", tech: "Stretch Isquios", notes: "Siente el estiramiento intenso." },
-                        { name: "Sentadilla Búlgara", reps: "3x12", tech: "Tensión Glúteo", notes: "Torso inclinado adelante." },
-                        { name: "Elevación Talones", reps: "4x20", tech: "Stretch Focus", notes: "Baja bien los talones." }
-                    ]
-                },
-                {
-                    focus: "PULL (ESPALDA/BICEPS)", exercises: [
-                        { name: "Hammer Espalda", reps: "4x8-12", tech: "Técnica 10/25", notes: "Aprieta las escápulas." },
-                        { name: "Remo Polea Baja", reps: "3x10-12", tech: "Rest Pause", notes: "Codos pegados al cuerpo." },
-                        { name: "Jalón Polea", reps: "3x8-12", tech: "Técnica 10/25", notes: "Codos hacia abajo." },
-                        { name: "Curl Bíceps Barra Z", reps: "3x12", tech: "Sin Inercia", notes: "Codos bloqueados." }
-                    ]
+                    focus: "PIERNA (POSTERIOR/GLÚTEO)", exercises: [
+                        { name: "Hip Thrust Pesado", reps: "4x10", tech: "Contracción 2s", notes: "Glúteos de acero." },
+                        { name: "Peso Muerto Rumano", reps: "4x10", tech: "Stretch", notes: "Sentir isquios estirarse." },
+                        { name: "Zancadas Caminando", reps: "3x20 pasos", tech: "Paso largo", notes: "Glúteo medio." }
+                    ], diet: "Batido de proteína con leche y banana. Pavo molido con pasta integral y ensalada."
                 },
                 {
                     focus: "FULL BODY / MOBILITY", exercises: [
-                        { name: "Cruce Poleas Alta", reps: "4x20", tech: "Pump", notes: "Finalizador de pecho." },
-                        { name: "Face Pulls", reps: "4x15", tech: "Salud Hombro", notes: "Postura." },
-                        { name: "Plancha Abdominal", reps: "4x1 min", tech: "Core Bracing", notes: "Tensión total." },
-                        { name: "Cardio LISS", reps: "30 min", tech: "Quema Grasa", notes: "Caminata rápida." }
-                    ]
+                        { name: "Press Smith Inclinado", reps: "3x10", tech: "Tensión", notes: "Finalizador pecho." },
+                        { name: "Elevaciones Laterales", reps: "4x15", tech: "RIR 1", notes: "Hombros anchos." },
+                        { name: "Plancha Abdominal", reps: "4x1 min", tech: "Estabilidad", notes: "Core rocoso." }
+                    ], diet: "Pan integral con crema de cacahuete (poca) y claras. Pescado blanco con papa al horno y espinacas."
                 }
             ],
             senior: [
                 {
-                    focus: "FUNCIONAL (+60)", exercises: [
-                        { name: "Sentarse y Levantarse (Silla)", reps: "3x12", tech: "Fuerza Base", notes: "Baja lento hasta tocar la silla." },
-                        { name: "Flexiones en Pared", reps: "3x12", tech: "Empuje Seguro", notes: "Cuerpo recto, manos a la altura del pecho." },
-                        { name: "Remo con Banda (Banda Elástica)", reps: "3x15", tech: "Postura", notes: "Espalda recta, tira hacia el ombligo." },
-                        { name: "Elevaciones Laterales (Ligeras)", reps: "3x12", tech: "Movilidad", notes: "Usa pesas muy pequeñas o botellas de agua." },
-                        { name: "Caminata en el Sitio", reps: "5 min", tech: "Cardio", notes: "Levanta las rodillas suavemente." }
+                    focus: "GYM BASE (FULL BODY)", exercises: [
+                        { name: "Leg Press (Máquina)", reps: "3x12", tech: "Movimiento Controlado", notes: "Gana masa en piernas sin impacto." },
+                        { name: "Chest Press (Máquina)", reps: "3x12", tech: "Empuje Seguro", notes: "Evita lesiones de hombro, construye pecho." },
+                        { name: "Seated Row (Máquina)", reps: "3x12", tech: "Postura Erguida", notes: "Combate la joroba, fortalece espalda." },
+                        { name: "Lat Pulldown (Máquina)", reps: "3x12", tech: "Codos Abajo", notes: "Construye amplitud y fuerza dorsal." }
                     ]
                 },
                 {
-                    focus: "EQUILIBRIO (+60)", exercises: [
-                        { name: "Equilibrio a una pierna", reps: "3x30 seg", tech: "Estabilidad", notes: "Apóyate en una silla si es necesario." },
-                        { name: "Paso Lateral con Banda", reps: "3x15", tech: "Cadera", notes: "Fortalece los laterales de la pierna." },
-                        { name: "Press de Hombros Sentado", reps: "3x12", tech: "Fuerza", notes: "Empuja hacia arriba suavemente." },
-                        { name: "Puntillas (Gemelos)", reps: "3x15", tech: "Circulación", notes: "Sube y baja talones despacio." }
+                    focus: "GYM PRO (FUERZA MÁQ.)", exercises: [
+                        { name: "Leg Extension (Máquina)", reps: "3x15", tech: "Pausa Arriba", notes: "Fortalece rodillas aumentando cuádriceps." },
+                        { name: "Seated Leg Curl", reps: "3x15", tech: "Control Tensión", notes: "Protege isquios, clave para estabilidad." },
+                        { name: "Shoulder Press (Máquina)", reps: "3x12", tech: "Rango Seguro", notes: "Fuerza de empuje vertical segura." },
+                        { name: "Bicep Curl (Máquina/Cables)", reps: "3x12", tech: "Aislamiento", notes: "Masa muscular en brazos." }
                     ]
                 },
                 {
-                    focus: "ESTIRAMIENTO (+60)", exercises: [
-                        { name: "Estiramiento de Pecho", reps: "3x30 seg", tech: "Apertura", notes: "Usa el marco de una puerta." },
-                        { name: "Gato-Camello (Suelo/Cama)", reps: "10 rep", tech: "Columna", notes: "Arquea y encorva la espalda suave." },
-                        { name: "Rotación de Cuello", reps: "10 rep", tech: "Movilidad", notes: "Círculos muy lentos." },
-                        { name: "Caminar por la Casa", reps: "15 min", tech: "Flujo Sangre", notes: "Ritmo constante." }
+                    focus: "GYM FUNCIONAL (CABLES)", exercises: [
+                        { name: "Cable Chest Fly", reps: "3x15", tech: "Tensión Constante", notes: "Control motor y masa pectoral." },
+                        { name: "Cable Face Pulls", reps: "3x15", tech: "Salud Escapular", notes: "Hombros saludables y fuertes." },
+                        { name: "Cable Tricep Pushdowns", reps: "3x15", tech: "Bloqueo Codos", notes: "Fortalece brazos para empujes." },
+                        { name: "Sostenimiento Pesas (Farmer Walk)", reps: "3x30 seg", tech: "Agarre", notes: "Fuerza funcional de manos y hombros." }
+                    ]
+                },
+                {
+                    focus: "GYM PIERNA (ESTABILIDAD)", exercises: [
+                        { name: "Prensa de Piernas (Pies Altos)", reps: "3x12", tech: "Foco Glúteo", notes: "Seguridad lumbar máxima." },
+                        { name: "Abducciones en Máquina", reps: "3x15", tech: "Cadera Fuerte", notes: "Previene caídas al fortalecer laterales." },
+                        { name: "Puntillas en Prensa", reps: "3x20", tech: "Retorno Venoso", notes: "Gemelos fuertes y buena circulación." }
+                    ]
+                },
+                {
+                    focus: "GYM CORE & MOBILITY", exercises: [
+                        { name: "Torso Rotation (Máquina)", reps: "3x15", tech: "Rango Medio", notes: "Nucleo fuerte, protege columna." },
+                        { name: "Abdominales en Máquina", reps: "3x15", tech: "Crunch Guiado", notes: "Músculos rectos abdominales." },
+                        { name: "Estiramientos con Polea", reps: "10 min", tech: "Relajación", notes: "Mejora rango de movimiento final." }
                     ]
                 }
             ]
@@ -333,11 +332,28 @@
             const displayFocus = document.getElementById('display-focus');
             const displayDay = document.getElementById('display-day');
 
-            const data = workoutData[state.tab][state.day] || workoutData[state.tab][0];
+            const data = workoutData[state.tab][state.day] || { focus: "DESCANSO", exercises: [] };
 
             displayDay.innerText = dayNames[state.day];
             displayFocus.innerText = data.focus;
 
+            if (data.exercises.length === 0) {
+                list.innerHTML = `<div class="glass-card p-10 text-center text-gray-500 uppercase font-black text-xl italic tracking-widest">Día de Recuperación</div>`;
+                // Clear diet suggestion if it's a rest day and no specific diet is provided
+                const dietMenu = document.querySelector('#diet-view .glass-card:last-child div.space-y-3');
+                if (dietMenu) {
+                    dietMenu.innerHTML = `<div class="p-3 bg-white/5 rounded-xl border-l-2 border-white/20"><b class="text-xs text-white block">Sugerencia Jeremy:</b><span class="text-xs text-gray-400">Día de recuperación, enfócate en hidratación y nutrición balanceada.</span></div>`;
+                }
+                return;
+            }
+
+            // Actualizar menú de dieta dinámico si existe en la data
+            if (data.diet) {
+                const dietMenu = document.querySelector('#diet-view .glass-card:last-child div.space-y-3');
+                if (dietMenu) {
+                    dietMenu.innerHTML = `<div class="p-3 bg-white/5 rounded-xl border-l-2 border-gold-500"><b class="text-xs text-white block">Sugerencia Jeremy:</b><span class="text-xs text-gray-400">${data.diet}</span></div>`;
+                }
+            }
             list.innerHTML = data.exercises.map(ex => `
                 <div class="glass-card p-6 flex justify-between items-center animate-fade border-l-4 ${state.tab === 'pro' ? 'border-red-500' : 'border-gold-500'}">
                     <div class="flex-1 pr-4">
