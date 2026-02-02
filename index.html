@@ -143,10 +143,20 @@
         <div id="diet-view" class="hidden space-y-6 animate-fade">
             <div class="glass-card p-6 border-l-4 border-cyan-400">
                 <h3 class="text-2xl font-black text-cyan-400 uppercase italic mb-4">Protocolo Jesus</h3>
-                <div class="flex items-center gap-4 mb-6">
+                <div class="flex flex-col gap-4 mb-6">
                     <div class="bg-black/40 px-6 py-4 rounded-2xl border border-white/10 text-center">
-                        <span class="block text-4xl font-black text-white">2350</span>
-                        <span class="text-[10px] font-black text-gray-500 uppercase">kcal totales</span>
+                        <span id="cal-display" class="block text-5xl font-black text-white">2350</span>
+                        <span class="text-[10px] font-black text-gray-500 uppercase tracking-widest">kcal
+                            objetivo</span>
+                    </div>
+
+                    <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
+                        <label class="text-[10px] font-black text-gold-500 uppercase block mb-2 text-center">Ajustar por
+                            Peso Local (lb)</label>
+                        <div class="flex gap-2">
+                            <input type="number" id="weight-input" value="291" oninput="calculateCals()"
+                                class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2 text-center font-bold outline-none focus:border-gold-500 transition">
+                        </div>
                     </div>
                 </div>
                 <div class="space-y-4">
@@ -344,9 +354,19 @@
             `).join('');
         }
 
+        function calculateCals() {
+            const weight = document.getElementById('weight-input').value;
+            if (!weight) return;
+            // Jeremy Ethier Recomp Formula: Bodyweight (lb) * 14-16 (maintenance) - small deficit
+            // For Jesus: 291 * 8.5 approx to reach 2350-2400
+            const cals = Math.round(weight * 8.075);
+            document.getElementById('cal-display').innerText = cals;
+        }
+
         window.onload = () => {
             renderDaySelector();
             render();
+            calculateCals();
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('./sw.js');
             }
