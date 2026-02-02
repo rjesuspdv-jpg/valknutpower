@@ -10,11 +10,12 @@
 
     <!-- PWA Meta Tags -->
     <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="logo.png">
     <meta name="theme-color" content="#0a0a0c">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="logo.png">
     <meta name="apple-mobile-web-app-title" content="VALKNUT">
-    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2936/2936886.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -130,7 +131,11 @@
     <!-- Top Navigation Tabs -->
     <header class="sticky top-0 z-50 bg-black/90 backdrop-blur-xl border-b border-white/10 px-4 py-4">
         <div class="max-w-xl mx-auto flex flex-col items-center gap-4">
-            <h1 class="text-3xl font-black italic tracking-tighter">VALKNUT<span class="text-red-500">POWER</span></h1>
+            <div class="flex flex-col items-center gap-2">
+                <img src="logo.png" alt="Valknut Logo" class="w-20 h-20 shadow-2xl rounded-2xl border border-white/5">
+                <h1 class="text-3xl font-black italic tracking-tighter">VALKNUT<span class="text-red-500">POWER</span>
+                </h1>
+            </div>
 
             <nav class="flex w-full justify-between items-center bg-white/5 p-1 rounded-2xl border border-white/10">
                 <button onclick="setTab('pro')" id="tab-pro" class="nav-tab flex-1 active">Valknut Pro</button>
