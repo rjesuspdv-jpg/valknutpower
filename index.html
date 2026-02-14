@@ -198,7 +198,8 @@
 
     <!-- App Content -->
     <div id="app-content" class="hidden">
-        <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/5 px-4 py-6">
+        <header
+            class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-xl border-b border-white/5 px-4 py-4 transition-all">
             <div class="max-w-xl mx-auto flex flex-col items-center gap-6">
                 <div class="flex items-center gap-4">
                     <img src="logo.png?v=3" alt="Valknut Logo" class="w-12 h-12 rounded-xl">
@@ -219,13 +220,9 @@
             <!-- Training View -->
             <div id="training-view" class="space-y-6">
                 <!-- Day Selector (L-V) -->
-                <div class="flex justify-between items-center bg-white/5 p-2 rounded-full border border-white/10"
-                    id="day-selector">
-                    <button onclick="setDay(0)" class="day-btn active">LUN</button>
-                    <button onclick="setDay(1)" class="day-btn">MAR</button>
-                    <button onclick="setDay(2)" class="day-btn">MIE</button>
-                    <button onclick="setDay(3)" class="day-btn">JUE</button>
-                    <button onclick="setDay(4)" class="day-btn">VIE</button>
+                <div class="flex overflow-x-auto space-x-2 pb-2 scrollbar-hide snap-x" id="day-selector"
+                    style="-webkit-overflow-scrolling: touch;">
+                    <!-- Buttons injected via JS -->
                 </div>
 
                 <h2 class="text-2xl font-black italic uppercase text-center border-b border-white/5 pb-4">
@@ -410,7 +407,8 @@
                             { name: "Hombro Lateral Acostado", reps: "3x 8-20", tech: "Doble Drop Set", notes: "Doble drop en las 3 mejores series.", desc: "Drop Set: Al terminar tus reps, reduce un 30% el peso y sigue. Reduce otro 30% y haz las últimas reps." },
                             { name: "Laso Tríceps (Pesado)", reps: "4x12", tech: "Potencia", desc: "Abre el lazo al final del movimiento hacia afuera para mayor contracción del tríceps.", notes: "Codos pegados, extensión total." },
                             { name: "Polea Barra + Copa Polea", reps: "3x12", tech: "Biserie", desc: "SUPER SERIE: Haz la polea con barra y sin soltarla pasa a la copa tras nuca con polea.", notes: "Tríceps denso y rocoso." }
-                        ]
+                        ],
+                        comida: "Post-Entreno Moderado: 250g de Arroz/Papa + 200g Carne Magra. Mantén los carbohidratos moderados para definición."
                     },
                     {
                         focus: "PIERNA A (CUÁDRICEPS + EXTRAS PEDRO)", exercises: [
@@ -420,7 +418,8 @@
                             { name: "Serie Gigante (Pedro)", reps: "3 sets", tech: "GIANT SET", desc: "Sigue el orden de la derecha sin parar entre ejercicios. Es la prueba máxima de resistencia de pierna.", notes: "Hacka(5) + Lunges(25) + Extension(10) + Lunges(25).", steps: ["Hacka (5 reps max)", "Walking Lunges (25 pasos)", "Leg Extension (10 reps)", "Walking Lunges (25 pasos final)"], img: "anatomical_leg_workout.png" },
                             { name: "Hip Thrust", reps: "4x12", tech: "Pausa 2s", desc: "Aprieta los glúteos con fuerza máxima durante 2 segundos en la parte más alta del movimiento.", notes: "Enfoque total en glúteo mayor." },
                             { name: "Biserie: Abductor + Sissy", reps: "4x12 + 50 reps", tech: "Biserie Final", desc: "Haz las abducciones y ve directo a la Sissy squat. En la Sissy intenta llegar a 50 reps totales.", notes: "Sissy squat para detalle final del cuádriceps.", steps: ["Máquina Abductor (12 reps)", "Sissy Squat (50 reps totales)"] }
-                        ]
+                        ],
+                        comida: "Carga Alta de Carbohidratos: 350-400g Arroz/Pasta Post-Entreno + 200g Pollo. Necesitas glucógeno para recuperar las piernas."
                     },
                     {
                         focus: "PULL - ESPALDA & BÍCEPS (PEDRO 2)", exercises: [
@@ -431,7 +430,8 @@
                             { name: "Rows al Fallo (Pedro Finish)", reps: "2x 25 reps", tech: "Circuito", desc: "Este circuito se hace sin soltar la barra. Máxima intensidad.", notes: "6 Remos + 5 Encogimientos + 5 PM + 5 Remos...", steps: ["6 Remos (Rows)", "5 Encogimientos", "5 Peso Muerto (PM)", "5 Remos Finales", "4 Encogimientos"], img: "instructional_back_workout.png" },
                             { name: "Curl Biceps Barra Z", reps: "5x 10-12", tech: "Drop Set", desc: "Mantén los codos clavados a los costados. En la quinta serie haz 2 bajadas de peso seguidas.", notes: "Última serie al fallo total." },
                             { name: "Curl Mancuerna + Predicador", reps: "5x12 + 6 series", tech: "Biserie", desc: "Mancuernas de pie seguido del predicador sentado para máximo aislamiento del pico del bíceps.", notes: "Predicador con drops en la última.", steps: ["Curl Mancuernas", "Curl Predicador (Aisla el pico)"] }
-                        ]
+                        ],
+                        comida: "Post-Entreno Sólido: 300g de Papa Asada/Cocida + 200g Bistec de Res. La carne roja ayuda con la creatina natural para fuerza."
                     },
                     {
                         focus: "PIERNA B (FEMORAL + EXTRAS PEDRO)", exercises: [
@@ -442,7 +442,8 @@
                             { name: "Walking Lunges (Pedro)", reps: "3x25", tech: "Pasos", desc: "Da pasos largos para enfocar el glúteo o cortos para el cuádriceps. Mantén el torso erguido.", notes: "Terminador metabólico." },
                             { name: "Elevación Gemelos Maquina", reps: "6x15", tech: "30s rest", desc: "Baja los talones lo más que puedas para estirar la fascia del gemelo antes de subir.", notes: "Estiramiento completo arriba y abajo." },
                             { name: "Extensión Gemelos Maquina", reps: "4x 10-12", tech: "60s rest", desc: "Movimiento controlado. Sostén 1 segundo la contracción máxima arriba.", notes: "Carga pesada controlada." }
-                        ]
+                        ],
+                        comida: "Alta en Carbohidratos (Cheat Meal Opción): Si vas a hacer Cheat Meal, hoy es el día (Sushi o Hamburguesa Casera) POST-ENTRENO."
                     },
                     {
                         focus: "SHOULDER PUSH - HOMBRO ENFOQUE (PEDRO 4)", exercises: [
@@ -453,7 +454,8 @@
                             { name: "Posterior Polea Alta", reps: "3x 8-20", tech: "Doble Drop", desc: "Cruza los cables frente a ti y jala hacia atrás con los brazos casi rectos.", notes: "Cruce de poleas para deltoide posterior." },
                             { name: "SUPER SERIE TODO UNO", reps: "2 sets", tech: "SIN DESCANSO", desc: "Es un circuito de 4 ejercicios sin parar. Fuego para los hombros.", notes: "Lat Sentado(10) + Tras Nuca(10) + Rear Delt(10) + Frontal(10).", steps: ["Elevación Lateral (10 reps)", "Press Tras Nuca (10 reps)", "Rear Delt Fly (10 reps)", "Elevación Frontal (10 reps)"], img: "instructional_shoulder_workout.png" },
                             { name: "Pectoral Inclinado Manc", reps: "2x12, 2x 6-8", tech: "Toque Pecho", desc: "Controla el peso. No rebotes la mancuerna en el pecho.", notes: "Mantenimiento de volumen de pecho." }
-                        ]
+                        ],
+                        comida: "Carbos Bajos/Moderados: 150g Arroz + Ensalada Verde + 200g Pescado/Tilapia. Mantén la cintura apretada."
                     },
                     {
                         focus: "ARM DAY - BRAZO ELITE (PEDRO 6)", exercises: [
@@ -464,7 +466,8 @@
                             { name: "Curl Martillo Pesado", reps: "3x10", tech: "Unilateral", desc: "Manten la palma de la mano mirando hacia tu cuerpo. Esfuerzo máximo.", notes: "Braquial potente." },
                             { name: "Curl Spider (Cadencia)", reps: "2x10 + 2x(2:3:10)", tech: "10:3:X:0", desc: "Apoyado en banco inclinado. Baja en 10s, quédate 3s muerto abajo y sube explosivo.", notes: "La cadencia es la clave. Explosivo vs Lento." },
                             { name: "Curl Inclinado / Barra", reps: "4x12", tech: "Estiramiento", desc: "En banco inclinado deja que los brazos cuelguen hacia atrás para estirar el bíceps antes de curlear.", notes: "Rango completo, estira el bíceps abajo." }
-                        ]
+                        ],
+                        comida: "Comida Élite: 4 Huevos Enteros + 150g Steak + Aguacate. Grasas saludables y proteínas para las hormonas anabólicas."
                     }
                 ],
                 senior: [
@@ -538,7 +541,8 @@
                 const days = 6; // Mon-Sat for Pro plan
                 let html = '';
                 for (let i = 0; i < days; i++) {
-                    html += `<button onclick="setDay(${i})" class="day-btn ${state.day === i ? 'active' : ''}">${dayNames[i].substring(0, 3)}</button>`;
+                    // Use flex-shrink-0 to prevent squishing in scroll view
+                    html += `<button onclick="setDay(${i})" class="day-btn flex-shrink-0 snap-center ${state.day === i ? 'active' : ''}">${dayNames[i].substring(0, 3)}</button>`;
                 }
                 container.innerHTML = html;
             }
@@ -553,11 +557,11 @@
                 if (document.getElementById('imageModal')) return;
                 const modalHTML = `
                 <div id="imageModal" class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 backdrop-blur-md hidden opacity-0 transition-opacity duration-300" onclick="closeImageModal()">
-                    <img id="modalImage" src="" class="max-w-[95%] max-h-[85vh] object-contain rounded-lg shadow-[0_0_50px_rgba(239,68,68,0.3)] transform scale-95 transition-transform duration-300 cursor-zoom-out" onclick="event.stopPropagation()">
-                    <button class="absolute top-6 right-6 text-white/50 hover:text-red-500 transition-colors z-50 p-4" onclick="closeImageModal()">
-                        <i class="fas fa-times text-4xl"></i>
+                    <img id="modalImage" src="" class="max-w-[95%] max-h-[80vh] object-contain rounded-lg shadow-[0_0_50px_rgba(239,68,68,0.3)] transform scale-95 transition-transform duration-300 cursor-zoom-out" onclick="event.stopPropagation()">
+                    <button class="absolute top-8 right-8 bg-black/50 text-white hover:text-red-500 transition-colors z-50 p-4 rounded-full backdrop-blur-xl border border-white/10" onclick="closeImageModal()">
+                        <i class="fas fa-times text-2xl"></i>
                     </button>
-                    <p id="modalCaption" class="absolute bottom-8 left-0 right-0 text-center text-white/60 font-medium tracking-[0.2em] uppercase text-sm px-4"></p>
+                    <p id="modalCaption" class="absolute bottom-10 left-0 right-0 text-center text-white/80 font-bold tracking-[0.2em] uppercase text-sm px-6"></p>
                 </div>`;
                 document.body.insertAdjacentHTML('beforeend', modalHTML);
             }
@@ -622,12 +626,31 @@
                 displayDay.innerText = dayNames[state.day];
                 displayFocus.innerText = data.focus;
 
+                // Render Daily Meal Tip
+                if (data.comida) {
+                    const mealHTML = `
+                    <div class="glass-card p-6 mb-6 border border-white/10 bg-gradient-to-r from-slate-900 to-slate-900/50 animate-fade">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-500 shrink-0">
+                                <i class="fas fa-utensils text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-[10px] font-black text-green-500 uppercase tracking-widest mb-1">COMIDA RECOMENDADA DE HOY</h4>
+                                <p class="text-sm font-medium text-slate-300 italic leading-relaxed">"${data.comida}"</p>
+                            </div>
+                        </div>
+                    </div>`;
+                    list.innerHTML = mealHTML;
+                } else {
+                    list.innerHTML = '';
+                }
+
                 if (data.exercises.length === 0) {
-                    list.innerHTML = `<div class="glass-card p-10 text-center text-gray-500 uppercase font-black text-xl italic tracking-widest">Día de Recuperación</div>`;
+                    list.innerHTML += `<div class="glass-card p-10 text-center text-gray-500 uppercase font-black text-xl italic tracking-widest">Día de Recuperación</div>`;
                     return;
                 }
 
-                list.innerHTML = data.exercises.map((ex, idx) => {
+                list.innerHTML += data.exercises.map((ex, idx) => {
                     const exerciseKey = `${state.tab}_${state.day}_${idx}`;
                     const saved = state.history[exerciseKey] || { weight: '', checked: false };
                     const lastWeight = saved.weight || '--';
@@ -676,7 +699,7 @@
                                 </div>
                                 <div class="bg-white/5 p-3 rounded-2xl text-center border-2 border-white/10">
                                     <span class="text-[10px] text-white/50 block uppercase font-black mb-1">Hoy (LB)</span>
-                                    <input type="number" value="${saved.weight}" oninput="saveWeight('${exerciseKey}', this.value)" 
+                                    <input type="number" inputmode="decimal" value="${saved.weight}" oninput="saveWeight('${exerciseKey}', this.value)" 
                                         placeholder="0" class="w-full bg-transparent text-center font-black text-white outline-none text-2xl">
                                 </div>
                                 <div class="bg-black/40 p-3 rounded-2xl text-center">
@@ -693,10 +716,17 @@
                             </h5>
                             
                             ${ex.img ? `
-                                <div class="relative group cursor-zoom-in" onclick="openImageModal('${ex.img}', '${ex.name}')">
-                                    <img src="${ex.img}" class="w-full h-32 object-cover rounded-xl mb-4 border border-white/10 shadow-lg animate-fade group-hover:brightness-110 transition-all" alt="${ex.name}">
-                                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/30 rounded-xl mb-4 pointer-events-none">
-                                        <i class="fas fa-search-plus text-white text-2xl drop-shadow-md"></i>
+                                <div class="relative mb-6 group cursor-zoom-in" onclick="openImageModal('${ex.img}', '${ex.name}')">
+                                    <img src="${ex.img}" class="w-full h-40 object-cover rounded-xl border border-white/10 shadow-lg animate-fade group-hover:brightness-110 transition-all" alt="${ex.name}">
+                                    
+                                    <!-- Mobile Indicator (Always Visible) -->
+                                    <div class="absolute bottom-3 right-3 bg-black/70 text-white w-8 h-8 flex items-center justify-center rounded-full pointer-events-none border border-white/20 shadow-md md:hidden backdrop-blur-sm">
+                                        <i class="fas fa-expand-alt text-xs"></i>
+                                    </div>
+
+                                    <!-- Desktop Overlay (Hover Only) -->
+                                    <div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl pointer-events-none hidden md:flex backdrop-blur-[2px]">
+                                        <i class="fas fa-search-plus text-white text-3xl drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)] transform scale-75 group-hover:scale-110 transition-transform duration-300"></i>
                                     </div>
                                 </div>` : ''}
 
