@@ -394,60 +394,77 @@
         <script>
             let state = {
                 tab: 'pro',
-                day: new Date().getDay() === 0 || new Date().getDay() === 6 ? 0 : new Date().getDay() - 1,
+                day: new Date().getDay() === 0 ? 0 : new Date().getDay() - 1,
                 history: JSON.parse(localStorage.getItem('valknut_history')) || {}
             };
 
             const workoutData = {
                 pro: [
                     {
-                        focus: "PECHO & HOMBROS (EMPUJE)", exercises: [
-                            { name: "Banca Inclinada Smith", reps: "2x15, 2x8 (MAX)", tech: "Técnica 10/25", notes: "Pedro Colina: 30 grados. Máxima tensión muscular." },
-                            { name: "Banca Plana Mancuernas", reps: "3x10", tech: "Carga Progresiva", notes: "Jeremy Ethier: Baja en 3 segundos, sube explosivo." },
-                            { name: "Cruce de Poleas", reps: "3x15", tech: "Tensión Constante", notes: "Pecho medio/inferior. Aprieta 1s al final." },
-                            { name: "Press Militar Mancuernas", reps: "3x12", tech: "Rango Completo", notes: "Hombro anterior. Controla la bajada." },
-                            { name: "Elevación Lateral Mancuerna", reps: "3x15", tech: "Doble Drop Set", notes: "Hombros redondos. 90s de descanso entre series." },
-                            { name: "Face Pulls", reps: "3x15", tech: "Salud Hombro", notes: "Hombro posterior y manguito rotador." },
-                            { name: "Cardio LISS", reps: "30 min", tech: "Quema Grasa", notes: "Caminata rápida tras las pesas." }
-                        ], diet: "Pre: Amino + Fruta. Post: ISO100 + Arroz/Papa."
+                        focus: "PUSH - PECHO & TRÍCEPS (PEDRO 1)", exercises: [
+                            { name: "Banca Inclinada Smith (30°)", reps: "1x15, 1x12, 2x5-8", tech: "Max Peso", desc: "Asegura el banco a 30 grados. Baja la barra hasta tocar el pecho superior de forma controlada y sube explosivo.", notes: "Tensión máxima. Pedro Colina Style." },
+                            { name: "Banca Plana (Manc/Barra)", reps: "1x12, 1x10, 1x8", tech: "Fuerza", desc: "Enfócate en juntar las escápulas. Baja en 3 segundos para maximizar el tiempo bajo tensión.", notes: "Baja en 3 segundos, sube explosivo." },
+                            { name: "Pecho Inclinado Hammer", reps: "2x12, 2x(10/25), 1x(3/7)", tech: "Fallo Metabólico", desc: "3/7: Haz 3 reps, descansa 5s; 4 reps, descansa 5s; 5 reps, descansa 5s; 6 reps, descansa 5s; y termina con 7 reps.", notes: "3/7: 3,4,5,6,7 reps con 5s de descanso." },
+                            { name: "Aperturas Flyes", reps: "1x12, 2x10, 2x(10/25)", tech: "Glass Card", desc: "10/25: Haz 10 reps, descansa 10s. Sigue haciendo reps con el mismo peso hasta completar 25 totales.", notes: "Sujetar desde arriba para activar pec superior." },
+                            { name: "Biserie: Cruce Poleas + Dips", reps: "10 reps (2 drops) + 15 reps", tech: "Biserie", desc: "SUPER SERIE: Haz el Cruce de Poleas e inmediatamente pasa a los Fondos (Dips) sin descansar nada.", notes: "Pectoral en cables + Fondos al fallo." },
+                            { name: "Hombro Lateral Acostado", reps: "3x 8-20", tech: "Doble Drop Set", notes: "Doble drop en las 3 mejores series.", desc: "Drop Set: Al terminar tus reps, reduce un 30% el peso y sigue. Reduce otro 30% y haz las últimas reps." },
+                            { name: "Laso Tríceps (Pesado)", reps: "4x12", tech: "Potencia", desc: "Abre el lazo al final del movimiento hacia afuera para mayor contracción del tríceps.", notes: "Codos pegados, extensión total." },
+                            { name: "Polea Barra + Copa Polea", reps: "3x12", tech: "Biserie", desc: "SUPER SERIE: Haz la polea con barra y sin soltarla pasa a la copa tras nuca con polea.", notes: "Tríceps denso y rocoso." }
+                        ]
                     },
                     {
-                        focus: "PIERNA A (CUÁDRICEPS & GLÚTEO)", exercises: [
-                            { name: "Sentadilla Smith / Libre", reps: "4x12, 10, 8, 8", tech: "Pirámide", notes: "Construcción de masa base. Controla la profundidad." },
-                            { name: "Prensa Pesada", reps: "4 sets", tech: "Drop Set + Rest Pause", notes: "Pies abajo para más cuádriceps." },
-                            { name: "Extensión Rodilla (Máquina)", reps: "3 sets", tech: "Triple Drop Set", notes: "Sostiene 5s en la última rep. Quema asegurada." },
-                            { name: "Hip Thrust", reps: "4x12", tech: "Pausa Arriba", notes: "Enfoque total en glúteo mayor." },
-                            { name: "Cardio LISS", reps: "30 min", tech: "Quema Grasa", notes: "Suave para no sobrecargar." }
-                        ], diet: "Día de carga. Carne roja y boniato."
+                        focus: "PIERNA A (CUÁDRICEPS + EXTRAS PEDRO)", exercises: [
+                            { name: "Extensión Rodilla (Warmup)", reps: "3x 30, 20, 15", tech: "Pre-Fatiga", desc: "Sostén 5 segundos en la última repetición de cada serie para acumular sangre en el cuádriceps.", notes: "1 Triple Drop Set sosteniendo 5s en la última." },
+                            { name: "Sentadilla Smith / Libre", reps: "4x12, 10, 8, 8", tech: "Carga Progresiva", desc: "Aumenta el peso en cada serie. Mantén la espalda recta y baja hasta romper el paralelo.", notes: "Controla profundidad. Base de masa." },
+                            { name: "Prensa Pesada", reps: "4 sets", tech: "Rest Pause / Drops", desc: "Rest Pause: Haz 8 reps, descansa 15s y haz otras 3-4 reps con el mismo peso.", notes: "2x15, 1x(8 con Rest Pause), 1x(Dropsets)." },
+                            { name: "Serie Gigante (Pedro)", reps: "3 sets", tech: "GIANT SET", desc: "Sigue el orden de la derecha sin parar entre ejercicios. Es la prueba máxima de resistencia de pierna.", notes: "Hacka(5) + Lunges(25) + Extension(10) + Lunges(25).", steps: ["Hacka (5 reps max)", "Walking Lunges (25 pasos)", "Leg Extension (10 reps)", "Walking Lunges (25 pasos final)"], img: "anatomical_leg_workout.png" },
+                            { name: "Hip Thrust", reps: "4x12", tech: "Pausa 2s", desc: "Aprieta los glúteos con fuerza máxima durante 2 segundos en la parte más alta del movimiento.", notes: "Enfoque total en glúteo mayor." },
+                            { name: "Biserie: Abductor + Sissy", reps: "4x12 + 50 reps", tech: "Biserie Final", desc: "Haz las abducciones y ve directo a la Sissy squat. En la Sissy intenta llegar a 50 reps totales.", notes: "Sissy squat para detalle final del cuádriceps.", steps: ["Máquina Abductor (12 reps)", "Sissy Squat (50 reps totales)"] }
+                        ]
                     },
                     {
-                        focus: "ESPALDA & BÍCEPS (JALÓN)", exercises: [
-                            { name: "Jalón Polea Agarre Cerrado", reps: "4x8", tech: "Rest Pause", notes: "Enfoque en amplitud dorsal." },
-                            { name: "Remo en Máquina Individual", reps: "2x10", tech: "Biserie", notes: "Aprieta escápulas 2s atrás." },
-                            { name: "Remo con Barra", reps: "3x10", tech: "Fuerza", notes: "Densidad de espalda." },
-                            { name: "Curl Barra Z", reps: "3x12", tech: "Estricto", notes: "Cabeza larga del bíceps." },
-                            { name: "Curl Martillo", reps: "3x12", tech: "Control", notes: "Braquial y antebrazo." },
-                            { name: "Curl Predicador", reps: "3x15", tech: "Aislamiento", notes: "Pico del bíceps, rango completo." },
-                            { name: "Cardio LISS", reps: "30 min", tech: "Quema Grasa", notes: "Mantén zona 2." }
-                        ], diet: "Pollo con pasta integral y ensalada."
+                        focus: "PULL - ESPALDA & BÍCEPS (PEDRO 2)", exercises: [
+                            { name: "Jalón Polea Cerrado", reps: "4x8", tech: "Rest Pause", desc: "Jala con los codos, no con las manos. En la última serie usa Rest Pause (15s de descanso y vuelve a tirar).", notes: "Tira con los codos hacia atrás." },
+                            { name: "Jalón Polea Individual", reps: "3x 6-10", tech: "Aislamiento", notes: "Máxima elongación del dorsal.", desc: "Inclínate ligeramente hacia el brazo que trabaja para estirar más el dorsal bajo." },
+                            { name: "Biserie: Remo Hammer + Maquina", reps: "1x(5-8) + 5-10 reps", tech: "Super-set", desc: "Remo pesado con un brazo, luego remo con ambos en máquina de forma controlada.", notes: "Pausa 15s entre sets. 2 drop sets al final.", steps: ["Remo Hammer Unilateral", "Remo en Máquina (Ambos brazos)"] },
+                            { name: "Biserie: Pull Over + Jalón Abierto", reps: "12-20 + 8-20 reps", tech: "Amplitud", desc: "Pull over para pre-fatigar el dorsal seguido de jalón abierto para terminar de reventar las fibras.", notes: "1 min de descanso entre cada set.", steps: ["Pull Over en Polea", "Jalón al Pecho Agarre Abierto"] },
+                            { name: "Rows al Fallo (Pedro Finish)", reps: "2x 25 reps", tech: "Circuito", desc: "Este circuito se hace sin soltar la barra. Máxima intensidad.", notes: "6 Remos + 5 Encogimientos + 5 PM + 5 Remos...", steps: ["6 Remos (Rows)", "5 Encogimientos", "5 Peso Muerto (PM)", "5 Remos Finales", "4 Encogimientos"], img: "instructional_back_workout.png" },
+                            { name: "Curl Biceps Barra Z", reps: "5x 10-12", tech: "Drop Set", desc: "Mantén los codos clavados a los costados. En la quinta serie haz 2 bajadas de peso seguidas.", notes: "Última serie al fallo total." },
+                            { name: "Curl Mancuerna + Predicador", reps: "5x12 + 6 series", tech: "Biserie", desc: "Mancuernas de pie seguido del predicador sentado para máximo aislamiento del pico del bíceps.", notes: "Predicador con drops en la última.", steps: ["Curl Mancuernas", "Curl Predicador (Aisla el pico)"] }
+                        ]
                     },
                     {
-                        focus: "PIERNA B (FEMORAL & GLÚTEO)", exercises: [
-                            { name: "Peso Muerto Piernas Rígidas", reps: "3x12", tech: "Estiramiento", notes: "Estira femoral al máximo. Baja lento." },
-                            { name: "Femoral Sentado/Acostado", reps: "4x12", tech: "Técnica 10/25", notes: "Frecuencia 2 para piernas masivas." },
-                            { name: "Patada de Glúteo en Polea", reps: "3x15", tech: "Aislamiento", notes: "Glúteo medio y mayor." },
-                            { name: "Zancadas / Lunges", reps: "3x20", tech: "Pasos", notes: "Terminador metabólico de pierna." },
-                            { name: "Cardio LISS", reps: "30 min", tech: "Quema Grasa", notes: "Drenaje láctico." }
-                        ], diet: "Post-pierna: Recuperación alta en hidratos."
+                        focus: "PIERNA B (FEMORAL + EXTRAS PEDRO)", exercises: [
+                            { name: "Peso Muerto Piernas Rígidas", reps: "3x12", tech: "Lento", desc: "Baja la barra rozando tus piernas. Siente el estiramiento en los isquios, no en la espalda baja.", notes: "Siente el trabajo en la parte posterior." },
+                            { name: "Femoral Sentado (Pedro)", reps: "7 sets", tech: "10/25", desc: "Usa la técnica 10/25: 10 reps, para 10s, sigue hasta 25. Bombeo de sangre máximo.", notes: "8-12 reps. 45-60s descanso." },
+                            { name: "Femoral Acostado (Pedro)", reps: "7x10", tech: "Parciales", desc: "Haz 10 completas, quédate 5s arriba apretando, y luego haz repeticiones cortas (parciales) hasta el fallo.", notes: "10 completas + 5 sosteniendo arriba + parciales." },
+                            { name: "Patada de Glúteo en Polea", reps: "3x15", tech: "Control", desc: "Controla el regreso de la pierna (fase negativa) para mayor tensión en el glúteo medio.", notes: "Glúteo medio/mayor." },
+                            { name: "Walking Lunges (Pedro)", reps: "3x25", tech: "Pasos", desc: "Da pasos largos para enfocar el glúteo o cortos para el cuádriceps. Mantén el torso erguido.", notes: "Terminador metabólico." },
+                            { name: "Elevación Gemelos Maquina", reps: "6x15", tech: "30s rest", desc: "Baja los talones lo más que puedas para estirar la fascia del gemelo antes de subir.", notes: "Estiramiento completo arriba y abajo." },
+                            { name: "Extensión Gemelos Maquina", reps: "4x 10-12", tech: "60s rest", desc: "Movimiento controlado. Sostén 1 segundo la contracción máxima arriba.", notes: "Carga pesada controlada." }
+                        ]
                     },
                     {
-                        focus: "BRAZOS, TRÍCEPS & DETALLE", exercises: [
-                            { name: "Press Francés Barra Z", reps: "4x12", tech: "Control", notes: "Cabeza larga del tríceps." },
-                            { name: "Extensiones Tríceps Polea", reps: "4x15", tech: "Bombeo", notes: "Cabeza lateral, aprieta abajo." },
-                            { name: "Laterales en Polea Acostado", reps: "3x20", tech: "Triple Drop Set", notes: "Congestión final del deltoide." },
-                            { name: "Cruce Polea Alta", reps: "4x15", tech: "Drop Set", notes: "Pecho superior y hombro posterior." },
-                            { name: "Cardio LISS", reps: "30 min", tech: "Quema Grasa", notes: "Cierre de semana perfecto." }
-                        ], diet: "Huevos con aguacate y pan integral."
+                        focus: "SHOULDER PUSH - HOMBRO ENFOQUE (PEDRO 4)", exercises: [
+                            { name: "Elevación Lateral Mancuerna", reps: "3x 6-10", tech: "Aprox", desc: "No subas las mancuernas más arriba de tus hombros para no involucrar el trapecio.", notes: "Activación lateral pesada." },
+                            { name: "Press Mancuerna", reps: "3x 6-8", tech: "Potencia", desc: "Sentado con apoyo en la espalda. Baja hasta que las mancuernas toquen casi tus hombros.", notes: "2 min descanso entre series." },
+                            { name: "Hammer Militar Press", reps: "4 sets", tech: "Parciales", desc: "En tu última serie, cuando no puedas hacer más reps completas, haz 3 cortas desde abajo.", notes: "Serie de trabajo + 3 parciales al final." },
+                            { name: "Laterales Polea (Banca)", reps: "3x 8-20", tech: "Double Drop", desc: "Acostado de lado en un banco. Estira el hombro al máximo abajo antes de subir.", notes: "Acostado sobre banca inclinada." },
+                            { name: "Posterior Polea Alta", reps: "3x 8-20", tech: "Doble Drop", desc: "Cruza los cables frente a ti y jala hacia atrás con los brazos casi rectos.", notes: "Cruce de poleas para deltoide posterior." },
+                            { name: "SUPER SERIE TODO UNO", reps: "2 sets", tech: "SIN DESCANSO", desc: "Es un circuito de 4 ejercicios sin parar. Fuego para los hombros.", notes: "Lat Sentado(10) + Tras Nuca(10) + Rear Delt(10) + Frontal(10).", steps: ["Elevación Lateral (10 reps)", "Press Tras Nuca (10 reps)", "Rear Delt Fly (10 reps)", "Elevación Frontal (10 reps)"], img: "instructional_shoulder_workout.png" },
+                            { name: "Pectoral Inclinado Manc", reps: "2x12, 2x 6-8", tech: "Toque Pecho", desc: "Controla el peso. No rebotes la mancuerna en el pecho.", notes: "Mantenimiento de volumen de pecho." }
+                        ]
+                    },
+                    {
+                        focus: "ARM DAY - BRAZO ELITE (PEDRO 6)", exercises: [
+                            { name: "Pull Down Lazo (Tríceps)", reps: "2x20, 2x12, 1 Drop", tech: "Drop 6-12-24", desc: "Haz 6 reps pesadas, baja peso x12 reps, baja peso x24 reps finales.", notes: "Serie descendente pesada al final." },
+                            { name: "Copa Pesada / Rompe Cráneos", reps: "3x12", tech: "Codo sano", desc: "Baja la pesa detrás de tu cabeza sintiendo como se estira la cabeza larga del tríceps.", notes: "Controla la negativa al máximo." },
+                            { name: "Press Cerrado + Patada Polea", reps: "4x12 + 4x10", tech: "Biserie", desc: "Press pesado con manos juntas seguido de patada para el bombeo final.", notes: "Densidad de herradura." },
+                            { name: "Curl Barra Z (Bíceps)", reps: "3x12, 1 Doble", tech: "Doble Tiempo", desc: "Doble tiempo: Baja en 4 segundos, sube explosivo, y aprieta 2 segundos arriba.", notes: "Última serie x12 en doble tiempo." },
+                            { name: "Curl Martillo Pesado", reps: "3x10", tech: "Unilateral", desc: "Manten la palma de la mano mirando hacia tu cuerpo. Esfuerzo máximo.", notes: "Braquial potente." },
+                            { name: "Curl Spider (Cadencia)", reps: "2x10 + 2x(2:3:10)", tech: "10:3:X:0", desc: "Apoyado en banco inclinado. Baja en 10s, quédate 3s muerto abajo y sube explosivo.", notes: "La cadencia es la clave. Explosivo vs Lento." },
+                            { name: "Curl Inclinado / Barra", reps: "4x12", tech: "Estiramiento", desc: "En banco inclinado deja que los brazos cuelguen hacia atrás para estirar el bíceps antes de curlear.", notes: "Rango completo, estira el bíceps abajo." }
+                        ]
                     }
                 ],
                 senior: [
@@ -518,7 +535,7 @@
 
             function renderDaySelector() {
                 const container = document.getElementById('day-selector');
-                const days = 5; // Mon-Fri for both
+                const days = 6; // Mon-Sat for Pro plan
                 let html = '';
                 for (let i = 0; i < days; i++) {
                     html += `<button onclick="setDay(${i})" class="day-btn ${state.day === i ? 'active' : ''}">${dayNames[i].substring(0, 3)}</button>`;
@@ -530,6 +547,51 @@
                 state.day = d;
                 renderDaySelector();
                 render();
+            }
+
+            function initModal() {
+                if (document.getElementById('imageModal')) return;
+                const modalHTML = `
+                <div id="imageModal" class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 backdrop-blur-md hidden opacity-0 transition-opacity duration-300" onclick="closeImageModal()">
+                    <img id="modalImage" src="" class="max-w-[95%] max-h-[85vh] object-contain rounded-lg shadow-[0_0_50px_rgba(239,68,68,0.3)] transform scale-95 transition-transform duration-300 cursor-zoom-out" onclick="event.stopPropagation()">
+                    <button class="absolute top-6 right-6 text-white/50 hover:text-red-500 transition-colors z-50 p-4" onclick="closeImageModal()">
+                        <i class="fas fa-times text-4xl"></i>
+                    </button>
+                    <p id="modalCaption" class="absolute bottom-8 left-0 right-0 text-center text-white/60 font-medium tracking-[0.2em] uppercase text-sm px-4"></p>
+                </div>`;
+                document.body.insertAdjacentHTML('beforeend', modalHTML);
+            }
+
+            function openImageModal(src, caption) {
+                const modal = document.getElementById('imageModal');
+                const img = document.getElementById('modalImage');
+                const cap = document.getElementById('modalCaption');
+                if (!modal) return;
+
+                img.src = src;
+                cap.innerText = caption;
+
+                modal.classList.remove('hidden');
+                void modal.offsetWidth; // Force reflow
+
+                modal.classList.remove('opacity-0');
+                img.classList.remove('scale-95');
+                img.classList.add('scale-100');
+            }
+
+            function closeImageModal() {
+                const modal = document.getElementById('imageModal');
+                const img = document.getElementById('modalImage');
+                if (!modal) return;
+
+                modal.classList.add('opacity-0');
+                img.classList.remove('scale-100');
+                img.classList.add('scale-95');
+
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    img.src = '';
+                }, 300);
             }
 
             function render() {
@@ -571,39 +633,94 @@
                     const lastWeight = saved.weight || '--';
                     const nextWeek = saved.weight && saved.checked ? Math.round(parseFloat(saved.weight) * 1.05) : '--';
 
-                    return `
-                <div class="glass-card p-6 animate-fade border-l-4 border-red-500">
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="flex-1 pr-4">
-                             <div class="flex items-center gap-3 mb-2">
-                                <div onclick="toggleCheck('${exerciseKey}')" class="check-btn w-8 h-8 ${saved.checked ? 'checked' : ''}">
-                                    <i class="fas fa-check text-white text-sm ${saved.checked ? '' : 'hidden'}"></i>
-                                </div>
-                                <h4 class="text-xl font-black text-white uppercase italic leading-tight">${ex.name}</h4>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="bg-white/10 text-white text-xs font-black px-3 py-1 rounded uppercase">${ex.reps}</span>
-                                <span class="text-[10px] uppercase font-bold text-gray-500 tracking-widest">${ex.tech}</span>
-                            </div>
-                        </div>
-                        <a href="https://www.youtube.com/results?search_query=ejercicio+${ex.name.replace(/ /g, '+')}" target="_blank" class="w-12 h-12 bg-white/5 text-white rounded-full flex items-center justify-center border border-white/10 shadow-lg">
-                            <i class="fas fa-play text-xs"></i>
-                        </a>
-                    </div>
+                    // Logic for multiple video links (Supersets/Biseries)
+                    const parts = ex.name.split(/ \+ | \/ /);
+                    const videoButtons = parts.map(part => {
+                        const searchQuery = `ejercicio+${part.trim().replace(/ /g, '+')}`;
+                        return `
+                            <a href="https://www.youtube.com/results?search_query=${searchQuery}" target="_blank" 
+                               class="w-10 h-10 bg-red-500/10 text-red-500 rounded-full flex items-center justify-center border border-red-500/20 shadow-lg hover:bg-red-500 hover:text-white transition-all"
+                               title="Ver video de ${part.trim()}">
+                                <i class="fas fa-play text-[10px]"></i>
+                            </a>
+                        `;
+                    }).join('');
 
-                    <div class="grid grid-cols-3 gap-3">
-                        <div class="bg-black/40 p-3 rounded-2xl text-center">
-                            <span class="text-[10px] text-gray-500 block uppercase font-black mb-1">Anterior</span>
-                            <span class="text-2xl font-black text-white">${lastWeight} <small class="text-xs text-gray-600">LB</small></span>
+                    return `
+                <div class="glass-card overflow-hidden animate-fade border-l-4 border-red-500">
+                    <div class="flex flex-col md:flex-row">
+                        <!-- Left Side: Interactive Area -->
+                        <div class="flex-1 p-6 border-b md:border-b-0 md:border-r border-white/5">
+                            <div class="flex justify-between items-start mb-6">
+                                <div class="flex-1 pr-4">
+                                     <div class="flex items-center gap-3 mb-2">
+                                        <div onclick="toggleCheck('${exerciseKey}')" class="check-btn w-8 h-8 ${saved.checked ? 'checked' : ''}">
+                                            <i class="fas fa-check text-white text-sm ${saved.checked ? '' : 'hidden'}"></i>
+                                        </div>
+                                        <h4 class="text-xl font-black text-white uppercase italic leading-tight">${ex.name}</h4>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="bg-white/10 text-white text-xs font-black px-3 py-1 rounded uppercase">${ex.reps}</span>
+                                        <span class="text-[10px] uppercase font-bold text-gray-500 tracking-widest">${ex.tech}</span>
+                                    </div>
+                                </div>
+                                <div class="flex gap-2">
+                                    ${videoButtons}
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-3">
+                                <div class="bg-black/40 p-3 rounded-2xl text-center">
+                                    <span class="text-[10px] text-gray-500 block uppercase font-black mb-1">Anterior</span>
+                                    <span class="text-2xl font-black text-white">${lastWeight} <small class="text-xs text-gray-600">LB</small></span>
+                                </div>
+                                <div class="bg-white/5 p-3 rounded-2xl text-center border-2 border-white/10">
+                                    <span class="text-[10px] text-white/50 block uppercase font-black mb-1">Hoy (LB)</span>
+                                    <input type="number" value="${saved.weight}" oninput="saveWeight('${exerciseKey}', this.value)" 
+                                        placeholder="0" class="w-full bg-transparent text-center font-black text-white outline-none text-2xl">
+                                </div>
+                                <div class="bg-black/40 p-3 rounded-2xl text-center">
+                                    <span class="text-[10px] text-cyan-500 block uppercase font-black mb-1">Sig. Sem</span>
+                                    <span class="text-2xl font-black text-cyan-500">${nextWeek} <small class="text-xs text-gray-600">LB</small></span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="bg-white/5 p-3 rounded-2xl text-center border-2 border-white/10">
-                            <span class="text-[10px] text-gold-500 block uppercase font-black mb-1">Hoy (LB)</span>
-                            <input type="number" value="${saved.weight}" oninput="saveWeight('${exerciseKey}', this.value)" 
-                                placeholder="0" class="w-full bg-transparent text-center font-black text-white outline-none text-2xl">
-                        </div>
-                        <div class="bg-black/40 p-3 rounded-2xl text-center">
-                            <span class="text-[10px] text-cyan-500 block uppercase font-black mb-1">Sig. Sem</span>
-                            <span class="text-2xl font-black text-cyan-500">${nextWeek} <small class="text-xs text-gray-600">LB</small></span>
+
+                        <!-- Right Side: Technical Explanation -->
+                        <div class="md:w-1/3 bg-slate-900/40 p-6 flex flex-col justify-center border-l border-white/5 bg-gradient-to-br from-transparent to-red-500/5">
+                            <h5 class="text-[10px] font-black text-red-500 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                                <i class="fas fa-info-circle"></i> EXPLICACIÓN TÉCNICA
+                            </h5>
+                            
+                            ${ex.img ? `
+                                <div class="relative group cursor-zoom-in" onclick="openImageModal('${ex.img}', '${ex.name}')">
+                                    <img src="${ex.img}" class="w-full h-32 object-cover rounded-xl mb-4 border border-white/10 shadow-lg animate-fade group-hover:brightness-110 transition-all" alt="${ex.name}">
+                                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/30 rounded-xl mb-4 pointer-events-none">
+                                        <i class="fas fa-search-plus text-white text-2xl drop-shadow-md"></i>
+                                    </div>
+                                </div>` : ''}
+
+                            ${ex.steps ? `
+                                <div class="space-y-3 mb-6">
+                                    ${ex.steps.map((step, i) => `
+                                        <div class="flex items-center gap-4 group">
+                                            <div class="w-6 h-6 rounded-full bg-red-500/20 border border-red-500/40 flex items-center justify-center text-[10px] font-black text-red-500 group-hover:bg-red-500 group-hover:text-white transition-all">
+                                                ${i + 1}
+                                            </div>
+                                            <span class="text-[11px] font-bold text-slate-300 uppercase tracking-tight">${step}</span>
+                                        </div>
+                                        ${i < ex.steps.length - 1 ? `<div class="ml-3 h-3 border-l border-red-500/20"></div>` : ''}
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+
+                            <p class="text-[13px] text-slate-400 font-medium leading-relaxed italic border-l-2 border-red-500/30 pl-3">
+                                "${ex.desc || 'Realiza el movimiento con control total y máxima explosión en la subida.'}"
+                            </p>
+                            <div class="mt-4 pt-4 border-t border-white/5">
+                                <span class="text-[9px] font-black text-slate-600 uppercase tracking-widest">PEDRO DICE:</span>
+                                <p class="text-[11px] text-slate-500 mt-1">${ex.notes}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -692,6 +809,7 @@
                 renderDaySelector();
                 render();
                 calculateCals();
+                initModal();
                 if ('serviceWorker' in navigator) {
                     navigator.serviceWorker.register('./sw.js');
                 }
